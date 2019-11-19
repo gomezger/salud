@@ -13,17 +13,20 @@ class OpinionMigration extends Migration
      */
     public function up()
     {
-        Schema::create('=opinion', function (Blueprint $table) {
+        Schema::create('opinion', function (Blueprint $table) {
+            $table->integer('id_profesional')->unsigned();
+
             $table->bigIncrements('id');
             $table->string('nombre',100);
             $table->string('email',100);
             $table->string('telefono',20);
             $table->longText('descripcion');
             $table->integer('aprobado')->default(0);
-            $table->foreing('id_profesional')
+            $table->foreign('id_profesional')
                 ->references('id')->on('profesional')
                 ->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 
@@ -34,6 +37,6 @@ class OpinionMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('=opinion');
+        Schema::dropIfExists('opinion');
     }
 }

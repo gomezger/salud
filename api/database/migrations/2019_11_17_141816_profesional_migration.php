@@ -13,10 +13,12 @@ class ProfesionalMigration extends Migration
      */
     public function up()
     {
-        Schema::create('=profesional', function (Blueprint $table) {
+        Schema::create('profesional', function (Blueprint $table) {
+            $table->integer('id_tipo')->unsigned();
+
             $table->bigIncrements('id');
             $table->string('nombre',100);
-            $table->foreing('id_tipo')
+            $table->foreign('id_tipo')
                 ->references('id')->on('tipo_profesional')
                 ->onDelete('cascade');
             $table->text('imagen');
@@ -34,6 +36,6 @@ class ProfesionalMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('=profesional');
+        Schema::dropIfExists('profesional');
     }
 }

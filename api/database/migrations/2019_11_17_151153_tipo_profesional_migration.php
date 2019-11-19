@@ -13,7 +13,7 @@ class TipoProfesionalMigration extends Migration
      */
     public function up()
     {
-        Schema::create('=tipo_profesional', function (Blueprint $table) {
+        Schema::create('tipo_profesional', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre',100);
             $table->timestamps();
@@ -27,6 +27,6 @@ class TipoProfesionalMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('=tipo_profesional');
+        Schema::dropIfExists('tipo_profesional');
     }
 }
