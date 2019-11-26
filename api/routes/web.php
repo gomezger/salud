@@ -11,6 +11,5 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::post('/usuarios/registrar/', 'UserController@register');
