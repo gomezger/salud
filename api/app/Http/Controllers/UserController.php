@@ -12,86 +12,102 @@ class UserController extends Controller
      * Registrar un usuario
      */
     public function register(Request $request){
-		//Recoger POST
-		$json = $request->input('json',null);
-        $params = json_decode($json);
-        $params_array = json_decode($json,true);
+
+        //obtengo token
+		$hash = $request->header('Authorization',null);
+		$jwtAuth = new JwtAuth();
+		$checkToken = $jwtAuth->checkToken($hash);		
         
-        //guardamos las variables
-		$name = (!is_null($json) && isset($params->name)) ? $params->name : null;
-		$email =(!is_null($json) && isset($params->email)) ? $params->email : null;
-		$password = (!is_null($json) && isset($params->password)) ? $params->password : null; 
-		$password2 = (!is_null($json) && isset($params->password2)) ? $params->password2 : null; 
-        
-        // verificar las claves
-        if($password==$password2){
+        //valido si el token es valido
+		if($checkToken){
 
-            //si existen datos: validamos datos
-            if(!is_null($params_array)){
-                //validar datos
-                $validate = \Validator::make( $params_array, [
-                    'email' => 'required|email|max:45',
-                    'name' => 'required',
-                    'password' => 'required|min:8|max:20'        
-                ]);
+            //Recoger POST
+            $json = $request->input('json',null);
+            $params = json_decode($json);
+            $params_array = json_decode($json,true);
+            
+            //guardamos las variables
+            $name = (!is_null($json) && isset($params->name)) ? $params->name : null;
+            $email =(!is_null($json) && isset($params->email)) ? $params->email : null;
+            $password = (!is_null($json) && isset($params->password)) ? $params->password : null; 
+            $password2 = (!is_null($json) && isset($params->password2)) ? $params->password2 : null; 
+            
+            // verificar las claves
+            if($password==$password2){
 
-                if(!$validate->fails()){
+                //si existen datos: validamos datos
+                if(!is_null($params_array)){
+                    //validar datos
+                    $validate = \Validator::make( $params_array, [
+                        'email' => 'required|email|max:45',
+                        'name' => 'required',
+                        'password' => 'required|min:8|max:20'        
+                    ]);
 
-                    // crear el usuario
-                    $usuario = new User();
-                    $usuario->email = $email;
-                    $usuario->name = $name;
-                    $usuario->password = hash('sha256',$password);
+                    if(!$validate->fails()){
 
-                    //verificar que no esté utilizado ese correo
-                    $aux = User::where(['email' => $email])->first();
+                        // crear el usuario
+                        $usuario = new User();
+                        $usuario->email = $email;
+                        $usuario->name = $name;
+                        $usuario->password = hash('sha256',$password);
 
-                    //no hay un usuario duplicado: creo el usuario
-                    if(!is_object($aux)){
-                        
-                        $usuario->save();
+                        //verificar que no esté utilizado ese correo
+                        $aux = User::where(['email' => $email])->first();
 
-                        $data = array(
-                            'status' => 'success',
-                            'code' => 200,
-                            'usuario' => $usuario
-                        );
+                        //no hay un usuario duplicado: creo el usuario
+                        if(!is_object($aux)){
+                            
+                            $usuario->save();
 
-                    //el correo ya esta registrado    
+                            $data = array(
+                                'status' => 'success',
+                                'code' => 200,
+                                'usuario' => $usuario
+                            );
+
+                        //el correo ya esta registrado    
+                        }else{
+                            $data = array(
+                                'status' => 'error',
+                                'errores' => ['El correo ya está registrado'],
+                                'code' => '404'
+                            );
+                        }
+
+                    //errores al validar    
                     }else{
                         $data = array(
                             'status' => 'error',
-                            'errores' => ['El correo ya está registrado'],
-                            'code' => '404'
+                            'code' => '404',
+                            'errores' =>  $this->errores($validate->errors()),
+                            'mensaje' => 'No se creó el usuario'
                         );
                     }
 
-                //errores al validar    
+                // no hay datos por post    
                 }else{
                     $data = array(
                         'status' => 'error',
                         'code' => '404',
-                        'errores' =>  $this->errores($validate->errors()),
+                        'errores' =>  ['no hay datos por POST'],
                         'mensaje' => 'No se creó el usuario'
                     );
                 }
 
-            // no hay datos por post    
+            // las claves no coinciden   
             }else{
                 $data = array(
                     'status' => 'error',
-                    'code' => '404',
-                    'errores' =>  ['no hay datos por POST'],
-                    'mensaje' => 'No se creó el usuario'
+                    'code' => 404,
+                    'errores' => ['Las contraseñas no coinciden']
                 );
             }
-
-        // las claves no coinciden   
         }else{
             $data = array(
-                'status' => 'error',
+                'success' => 'error',
                 'code' => 404,
-                'errores' => ['Las contraseñas no coinciden']
+                'errores' => ['No inició sesión']
             );
         }
 
