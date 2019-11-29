@@ -105,7 +105,7 @@ class UserController extends Controller
             }
         }else{
             $data = array(
-                'success' => 'error',
+                'status' => 'error',
                 'code' => 404,
                 'errores' => ['No inició sesión']
             );
