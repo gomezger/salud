@@ -14,10 +14,12 @@
 
 Route::group(['middleware' => ['cors']], function () {
     
-    //usuarios
+    // usuarios
     Route::post('/usuarios/registrar/', 'UserController@register');
     Route::post('/usuarios/login/', 'UserController@login');
 
-
+    // informacion
+    Route::get('/informacion/', 'InformacionController@getInformacion');
+    
 
 });
