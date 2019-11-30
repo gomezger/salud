@@ -33,7 +33,7 @@ class UserController extends Controller
             $password2 = (!is_null($json) && isset($params->password2)) ? $params->password2 : null; 
             
             // verificar las claves
-            if($password==$password2){
+            if(!is_null($password) && $password==$password2){
 
                 //si existen datos: validamos datos
                 if(!is_null($params_array)){
