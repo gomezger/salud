@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Informacion extends Migration
+class CreateInformacion extends Migration
 {
     /**
      * Run the migrations.
@@ -21,9 +21,7 @@ class Informacion extends Migration
             $table->bigIncrements('id');  
             $table->string('nombre',100);	
             $table->string('email',100);		
-            $table->integer('telefono')->unsigned();   
-
-            $table->primary('id');			
+            $table->integer('telefono')->unsigned();   		
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ class Informacion extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('informacion');
     }
 }
