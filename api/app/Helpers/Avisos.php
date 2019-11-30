@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\BD;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Aviso;
+use App\Informacion;
 
 class Avisos{
-    protected $header, $cuerpo1, $cuerpo2, $footer;
     protected $correo_oficial;
     protected $correo_soporte;
     protected $nombre_oficial;
@@ -20,12 +20,39 @@ class Avisos{
     }
 
     /**
+     * Eniva uan consulta hecha desde el form de la web
+     */
+    public function correoWeb($email,$nombre,$mensaje,$telefono){
+
+        //agrego nombre y email
+        $consulta = '
+            > Nombre: '.$nombre.'<br>
+            > Correo: '.$email.'<br>
+        ';
+
+        //agrego telefono si lo puso
+        if(!is_null($telefono)){
+            $consulta.='
+                > Teléfono: '.$telefono.'<br>
+            ';
+        }
+
+        //agrego el mensaje
+        $consulta.='
+            > Mensaje: '.$mensaje.'<br>
+        ';
+
+        $this->agregarCorreo($this->correo_oficial,'Consulta enviada desde la web',$consulta,$email,$nombre);        
+    }
+
+
+    /**
      * Envia los avisos actuales
      */
     public function enviarAvisos(){
 
         //obtengo los envios
-        $avisos = Aviso::where('enviado','=',0);
+        $avisos = Aviso::where('enviado','=',0)->get();
 
         //recorro los avisos y los voy enviando
         foreach($avisos as $aviso){
@@ -95,24 +122,69 @@ class Avisos{
         
         //enviar correo
         if(!$mail->send()){
-            throw new ExceptionCorreo($mail->ErrorInfo);
+            throw new Exception($mail->ErrorInfo);
         }
 
     }
+    
+    /**
+     * Se agrega un correo a la base de datos. El sistema se encarga de enviarlo cuando es correcto.
+     * $to: correo al que se envia el mail
+     * $asunto: asunto que se muestra en el correo
+     * $mensaje: cuerpo del mensaje en formato HTML
+     * $from: correo desde el que se envia el mail
+     * $from_name: nombre representativo del cual se envia el mail
+     * $archivo: adjunto a enviar
+     */
+    public function agregarCorreo($to,$asunto,$mensaje,$from,$from_name=NULL,$archivo=NULL){
+
+        //creo el aviso
+        $aviso = new Aviso();
+        $aviso->destinatario = $to;
+        $aviso->asunto = $asunto;
+        $aviso->mensaje = $mensaje;
+        $aviso->emisor = $from;
+        $aviso->emisor_nombre = $from_name;
+        $aviso->adjunto = $archivo;
+        $aviso->enviado = 0;
+
+        $aviso->save();
+    }
+
 
 
     /**
      * Setea los correos
      */
     private function setearCorreos(){
-        $info = Informacion::first();
+        $info = Informacion::where('id',1)->first();
 
-        if(is_object()){
-            $correo_oficial = $info->email;
-            $nombre_oficial = $info->nombre;
+        if(is_object($info)){
+            $this->correo_oficial = $info->email;
+            $this->nombre_oficial = $info->nombre;
         }
-        
         $correo_soporte = 'xeron08@hotmail.com';
     }
+
+    private function getCorreoOficial(){
+        $info = Informacion::where('id',1)->first();
+
+        if(is_object($info)){
+            return $info->email;
+        }else{
+            return null;
+        }
+    }
+
+    private function getNombreOficial(){
+        $info = Informacion::where('id',1)->first();
+
+        if(is_object($info)){
+            return $info->name;
+        }else{
+            return null;
+        }
+    }
 }
+
 
