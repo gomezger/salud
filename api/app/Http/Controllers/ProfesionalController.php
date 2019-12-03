@@ -120,4 +120,33 @@ class ProfesionalController extends Controller{
          return response()->json($data,200);         
       } 
    }
+
+   public function getProfesional(){
+      $profesionales= Profesional::orderBy('id','desc')->get()->load('tipo_profesional','opinion');
+      return response()->json(array(
+         'profesionales'=>$profesionales,
+         'status'=>'success'
+      ),200);
+   }
+
+   public function getProfesionalById($id){
+      $profesional = Profesional::where([['id', '=', $id]])->get()->first();
+
+      if(!is_null($profesional)){
+         $profesional->load('tipo_profesional','opinion');
+         return response()->json(array(
+            'profesional'=>$profesional,
+            'status'=>'success'
+         ),200);
+
+      }else{
+         //El profesional con ese id no existe
+         
+			return response()->json(array(
+				'message' => 'El profesional no existe.',
+				'status' => 'error'
+			), 200);
+      }
+   }
+
 }
