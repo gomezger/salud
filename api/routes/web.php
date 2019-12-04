@@ -26,5 +26,5 @@ Route::group(['middleware' => ['cors']], function () {
     
     //profesionales
     Route::post('/profesionales/insert/','ProfesionalController@insertProfesional');
-    Route::post('/profesionales/','ProfesionalController@getProfesional');
+    Route::post('/profesionales/','ProfesionalController@getProfesionales');
 });

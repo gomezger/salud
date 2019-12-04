@@ -181,7 +181,7 @@ class ProfesionalController extends Controller{
       } 
    }
 
-   public function getProfesional(){
+   public function getProfesionales(){
       $profesionales= Profesional::orderBy('id','desc')->get()->load('tipo_profesional','opinion');
       return response()->json(array(
          'profesionales'=>$profesionales,
