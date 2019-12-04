@@ -24,5 +24,7 @@ Route::group(['middleware' => ['cors']], function () {
     //avisos
     Route::post('/avisos/correoweb/', 'AvisosController@correoWeb');
     
-
+    //profesionales
+    Route::post('/profesionales/insert/','ProfesionalController@insertProfesional');
+    Route::post('/profesionales/','ProfesionalController@getProfesional');
 });

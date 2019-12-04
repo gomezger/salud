@@ -8,12 +8,12 @@ class Profesional extends Model
 {
     protected $table='profesional';
 
-    public function tipoProfesional(){
-        return $this->belongTo('App/TipoProfesional');
+    public function tipo_profesional(){
+        return $this->belongTo('App\TipoProfesional');
     }
 
     public function opiniones(){
-        return $this->hasMany('App/Opiniones'); 
+        return $this->hasMany('App\Opinion','id_profesional','id'); 
     }
 
 }

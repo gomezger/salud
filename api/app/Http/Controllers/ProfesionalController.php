@@ -29,88 +29,148 @@ class ProfesionalController extends Controller{
          $telefono=(!is_null($json) && isset($params->telefono)) ? $params->telefono : null;
          
 
-         //Reglas de validacion
-         $validar= \Validator::make($params_array,[
-                  'nombre' => 'required',
-                  'tipo_profesional'=> 'required',
-                  'email'=> 'required'
-         ]);
+         //chequeamos que tengamos datos por POST
+         if(!is_null($params_array)){
 
-         //si hay errores envio el error
-         if($validar->fails()){
+             //Reglas de validacion
+            $validar= \Validator::make($params_array,[
+               'nombre' => 'required',
+               'tipo_profesional'=> 'required',
+               'email'=> 'required|email',
+               'telefono' => 'required'
+            ]);
+
+            //si hay errores envio el error
+            if($validar->fails()){
+               
+               $data = array(
+                  'status' => 'error',
+                  'code' => 400,
+                  'errores' => $this->errores($validar->errors()),
+                  'messages' => 'Campos no validos',
+               );
+
+               return response()->json($data,200);  
+
+            }
+
+            // verificar que existe el tipo de profesional
+            $tipo_profesional = TipoProfesional::find($tipo_profesional);
+            if(is_null($tipo_profesional)){
+
+               $data = array(
+                  'status' => 'error',
+                  'code' => 400,
+                  'errores' => ['El tipo de profesional no existe'],
+                  'messages' => 'No existe el tipo de profesional ingresado',
+               );
+               return response()->json($data,200);  
+            }
+
+
+            //subir imagen
+            $imagen= $request->file('imagen',null);
+
+            // verificar imagen
+            if(!is_null($imagen)){
+   
+               $validar=\Validator::make(["imagen"=>$imagen],[
+						'imagen' => 'mimes:jpeg,gif,png|required'
+               ]);
+
+               if($validar->fails()){
+                  $data = array(
+                     'status' => 'error',
+                     'code' => 400,
+                     'errores' => $this->errores($validar->errors()),
+                     'messages' => 'Campos no validos',
+                  );
+                  return response()->json($data,200);    
+
+               }else{
+                  //Foto valida
+                  $imagen_original_path = $imagen->getClientOriginalName();
+                  $imagen_new_path = time().$imagen->hashName();
+                  \Storage::disk('public')->put($imagen_new_path, \File::get($imagen));
+                  
+               }
+
+            }else{
+               $data = array(
+                  'status' => 'error',
+                  'code' => 400,
+                  'messages' => 'Campos no validos',
+                  'errores' => ['La imagen es obligatoria']
+               );
+               return response()->json($data,200);       
+            }
+
+            //obtener cv
+            $cv=$request->file('cv',null);
+
+            //VALIDAR CV
+            if(!is_null($cv)){
+
+               $validar=\Validator::make(["cv"=>$cv],[
+                  'cv'=> 'required'
+               ]);
+
+               if($validar->fails()){
+                  $data = array(
+                     'status' => 'error',
+                     'code' => 400,
+                     'errores' => $this->errores($validar->errors()),
+                     'messages' => 'Error CV',
+                  );
+                  return response()->json($data,200);         
+
+               }else{
+                  //CV valido
+                  $cv_original_path=$cv->getClientOriginalName();
+                  $cv_new_path=time().$cv->hashName();
+                  \Storage::disk('public')->put($cv_new_path, \File::get($cv));
+               }
+
+            }else{
+               $data = array(
+                  'status' => 'error',
+                  'code' => 400,
+                  'messages' => 'Error CV',
+                  'errores' => ['No ingresó el cv']
+               );
+               return response()->json($data,200);   
+            }           
             
+            //crear modelo
+            $profesional=new Profesional;
+
+            $profesional->nombre=$nombre;
+            $profesional->id_tipo=$tipo_profesional->id;
+            $profesional->email=$email;
+            $profesional->telefono=$telefono;
+            $profesional->imagen=$imagen_new_path;
+            $profesional->cv=$cv_new_path;
+
+            $profesional->save();
+            $profesional->load('opiniones');
+
+            $data = array(
+               'status' => 'success',
+               'profesional' => $profesional,
+               'code' => 200,
+               'message' => 'Se agregó el nuevo profesional'
+            );
+            return response()->json($data,200);           
+
+         }else{
             $data = array(
                'status' => 'error',
                'code' => 400,
-               'messages' => 'Campos no validos',
+               'messages' => 'No hay datos por POST',
             );
-            return response()->json($data,200);         
-          }
-
-          $imagen= $request->file('imagen',null);
-          $imagenes = ["imagen"=>$imagen];
-
-          $validar=\Validator::make([$imagenes,
-               'imagen'=> 'mimes:jpeg,gif,png|required'
-          ]);
-         
-          if($validar->fails()){
-            $data = array(
-               'status' => 'error',
-               'code' => 400,
-               'messages' => 'Campos no validos',
-            );
-            return response()->json($data,200);         
-          }else{
-             //Foto valida
-             $imagen_original_path = $imagen->getClientOriginalName();
-             $imagen_new_path = time().$imagen->hashName();
-             \Storage::disk('public')->put($imagen_new_path, \File::get($imagen));
-          }
-
-          $cv=$request->file('cv',null);
-          //VALIDAR CV
-          $cvs = ["cv"=>$cv];
-          $validar=\Validator::make([$cvs,
-            'cv'=> 'required'
-          ]);
-
-          if($validar){
-            $data = array(
-               'status' => 'error',
-               'code' => 400,
-               'messages' => 'Error CV',
-            );
-            return response()->json($data,200);         
-
-          }else{
-             //CV valido
-             $cv_original_path=$cv->getClientOriginalName();
-             $cv_new_path=time().$cv->hashName();
-             \Storage::disk('public')->put($cv_new_path, \File::get($cv));
-          }
-
-          
-          $profesional=new Profesional;
-
-          $profesional->nombre=$nombre;
-          $profesional->tipo_profesional=$tipo_profesional;
-          $profesional->email=$email;
-          $profesional->telefono=$telefono;
-          $profesional->imagen=$imagen_new_path;
-          $profesional->cv=$cv_new_path;
-
-          $profesional->save();
-          $profesional->load('tipo_profesional','opinion');
-
-          $data = array(
-            'status' => 'success',
-            'profesional' => $profesional,
-            'code' => 200,
-            'message' => array('Se agregó el nuevo profesional')
-         );
-         return response()->json($data,200);
-
+            return response()->json($data,200); 
+         }
+        
       }else{
          $data = array(
             'status' => 'error',
