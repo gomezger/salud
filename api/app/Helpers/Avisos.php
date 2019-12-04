@@ -4,6 +4,7 @@ namespace App\Helpers;
 use Illuminate\Support\Facades\BD;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use App\Exception\AvisosException;
 use App\Aviso;
 use App\Informacion;
 
@@ -65,7 +66,7 @@ class Avisos{
                 $aviso->enviado = 1;
                 $aviso->save();
             
-            }catch(ExceptionCorreo $e){
+            }catch(Exception $e){
                 //envio un correo de falla a mi correo
                 $this->enviarCorreo($this->correo_soporte,'No se envia mail -'.$aviso->asunto,$aviso->mensaje,'error@cuidarsaludarg.com',$aviso->emisor_nombre,$aviso->adjunto);     
             }
@@ -151,10 +152,8 @@ class Avisos{
         $aviso->save();
     }
 
-
-
     /**
-     * Setea los correos
+     * Setea los correos por defecto
      */
     private function setearCorreos(){
         $info = Informacion::where('id',1)->first();
@@ -164,26 +163,6 @@ class Avisos{
             $this->nombre_oficial = $info->nombre;
         }
         $correo_soporte = 'xeron08@hotmail.com';
-    }
-
-    private function getCorreoOficial(){
-        $info = Informacion::where('id',1)->first();
-
-        if(is_object($info)){
-            return $info->email;
-        }else{
-            return null;
-        }
-    }
-
-    private function getNombreOficial(){
-        $info = Informacion::where('id',1)->first();
-
-        if(is_object($info)){
-            return $info->name;
-        }else{
-            return null;
-        }
     }
 }
 
