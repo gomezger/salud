@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TipoProfesional extends Model
 {
-     protected $table='tipo_profesional';
+    protected $table='tipo_profesional';
 
-    public function profesional(){
-        return $this->hasMany('App\Profesional');
+    public function profesionales(){
+        return $this->HasMany('App\Profesional','id_tipo','id');
     }
 }
