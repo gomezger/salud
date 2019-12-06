@@ -6,10 +6,12 @@ import * as $ from 'jquery';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers : [UsuarioService]
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.css'],
+	providers : [
+	  	UsuarioService
+	]
 })
 export class LoginComponent implements OnInit {
 	public user: Usuario;
@@ -26,7 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this._titleService.setTitle('Login - Panel de Control');
     // variables de sesion
-    this.user = new Usuario(0,"","",null,"",null,null);
+    this.user = new Usuario(0,"","",null,"","",null,null);
   }
 
   /**
@@ -40,6 +42,8 @@ export class LoginComponent implements OnInit {
 		$('.alert').addClass('alert-info');
 		$('.alert').removeClass('d-none');
 		$('.alert').text('Validando datos...');
+
+		console.log(this.user);
 
 		//le paso el usuario que solo tiene la contraseña y el usuario
 		this._usuarioService.login(this.user).subscribe(

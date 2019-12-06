@@ -164,4 +164,54 @@ class UserController extends Controller
             return $data;
         }
     }
+
+    /**
+     * Devuelve el token del usuario logueado
+     */
+    public function info(Request $request){
+       
+        $jwtAuth = new \JwtAuth();
+
+        //obtener datos de post
+        $json = $request->input('json', null);
+        $params = json_decode($json);
+        $params_array = json_decode($json,true);
+
+        if(!is_null($params_array)){
+            //validar datos
+            $validate = \Validator::make( $params_array, [
+                'email' => 'required|email',
+                'password' => 'required'            
+            ]);
+
+            if($validate->fails()){
+                $data = array(
+                    'status' => 'error',
+                    'code' => '404',
+                    'errores' =>  $this->errores($validate->errors()),
+                    'mensaje' => 'No se inició sesión'
+                );
+
+                return $data;
+
+            }else{
+
+                // cifrar pass
+                $password = hash('sha256', $params->password);
+                $token = $jwtAuth->getToken($params->email,$password);
+
+                return response()->json($token,200);
+            }
+
+
+        }else{
+
+            $data = array(
+                'status' => 'error',
+                'errores' => ['No hay datos por POST']
+            );
+
+            return $data;
+        }
+    }
 }
