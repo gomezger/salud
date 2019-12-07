@@ -377,5 +377,56 @@ class ProfesionalController extends Controller{
       return $data;
    }
 
-   
+   public function deleteProfesional($id, Request $request){
+      $hash = $request->header('Authorization',null);
+      $jwtAuth = new JwtAuth();
+      $checkToken = $jwtAuth->checkToken($hash);
+
+      
+        //verificar si es un token valido
+        if($checkToken){
+         //buscar profesional
+         $profesional = Profesional::find($id);
+         //si existe el tipo
+         if(!is_null($profesional)){
+             //cargamos profesionales
+             $profesional = $profesional->load('opiniones');
+             // chequeamos que no tenga profesionales
+             if(count($profesional->opiniones)==0){
+                 // guardar tipo
+                 $profesional->delete();
+                 // mensaje de retorno
+                 $data = array(
+                     'status' => 'success',
+                     'profesional' => $profesional,
+                     'code' => 200,
+                     'message' => 'Se eliminó el profesional'
+                 );
+             }else{
+                 // mensaje de retorno
+                 $data = array(
+                     'status' => 'error',
+                     'errores' => ['No se puede eliminar si hay profesionales asociados con opiniones'],
+                     'message' => 'Error al eliminar el profesional'
+                 );
+             }                
+         }else{
+             // mensaje de retorno
+             $data = array(
+                 'status' => 'error',
+                 'errores' => ['No existe el profesional'],
+                 'message' => 'Error al eliminar el profesional'
+             );
+         }
+     }else{
+         $data = array(
+           'status' => 'error',
+           'errores' => ['No inició sesión'],
+           'message' => 'Error al eliminar el profesional'
+         );
+     }
+       
+     return $data;
+
+   }
 }
