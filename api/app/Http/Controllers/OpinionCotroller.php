@@ -103,4 +103,24 @@ class OpinionCotroller extends Controller
              return response()->json($data,200);         
         }
     }
+
+    public function getOpinionByProfesional($profesional_id){
+        $opinion= Opinion::where([['id_profesional', '=', $profesional_id]])->get();
+        
+        if(!is_null($opinion)){
+            $opinion->load('profesional');
+            return response()->json(array(
+               'opinion'=>$opinion,
+               'status'=>'success'
+            ),200);
+   
+         }else{
+            //El profesional con ese id no existe
+            return response()->json(array(
+                'message' => 'El profesional no existe.',
+                'status' => 'error'
+            ), 200);
+         }
+    }
+    
 }
