@@ -225,4 +225,47 @@ class OpinionCotroller extends Controller
              return response()->json($data,200);         
         }
     }
+
+    public function deleteOpinion($id, Request $request){
+        $hash = $request->header('Authorization',null);
+        $jwtAuth = new JwtAuth();
+        $checkToken = $jwtAuth->checkToken($hash);
+
+      
+        //verificar si es un token valido
+        if($checkToken){
+         //buscar profesional
+         $opinion = Opinion::find($id);
+         //si existe el tipo
+         if(!is_null($opinion)){
+             //cargamos profesionales
+             $opinion = $opinion->load('profesional');
+             // guardar tipo
+             $opinion->delete();
+            // mensaje de retorno
+            $data = array(
+                'status' => 'success',
+                'profesional' => $profesional,
+                'code' => 200,
+                'message' => 'Se eliminó la opinion'
+            );
+                             
+         }else{
+             // mensaje de retorno
+             $data = array(
+                 'status' => 'error',
+                 'errores' => ['No existe la opinion'],
+                 'message' => 'Error la opinion'
+             );
+         }
+     }else{
+         $data = array(
+           'status' => 'error',
+           'errores' => ['No inició sesión'],
+           'message' => 'Error al eliminar la opinion'
+         );
+     }
+       
+     return $data;
+    }
 }
