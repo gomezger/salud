@@ -5,8 +5,8 @@
     <div class="border-right sidebar-wrapper text-left" id="sidebar-wrapper">
       <div class="sidebar-heading">Panel de control</div>
       <div class="list-group list-group-flush text-left">
-        <a [routerLink]="['profesionales']" class="item"><i class="fas fa-id-card-alt mr-2"></i> Profesionales</a>
-        <a [routerLink]="['opiniones']" class="item"><i class="fas fa-comments mr-2"></i> Opiniones</a>
+        <a [routerLink]="['/panel/profesionales']" class="item"><i class="fas fa-id-card-alt mr-2"></i> Profesionales</a>
+        <a [routerLink]="['/panel/opiniones']" class="item"><i class="fas fa-comments mr-2"></i> Opiniones</a>
         <a href="https://api.whatsapp.com/send?phone=5492915204726" target="_blank" class="item"><i class="fas fa-headset mr-2"></i>Soporte técnico</a>
         <a class="item exit" (click)="logout()"><i class="fas fa-sign-out-alt mr-2" ></i>Cerrar Sesión</a>
       </div>

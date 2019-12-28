@@ -16,7 +16,8 @@ const routes: Routes = [
 		{path: 'profesionales', component: ProfesionalesComponent }, 
 		{path: 'opiniones', component: OpinionesComponent } 
 	  ]  
-	}
+	},
+	{ path: '**',  component: PanelComponent }
   
   ];
 

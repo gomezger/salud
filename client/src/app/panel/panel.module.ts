@@ -9,13 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProfesionalesComponent } from './profesionales/profesionales.component';
 import { OpinionesComponent } from './opiniones/opiniones.component';
+import { HeaderComponent } from './componentes/header/header.component';
 
 
 @NgModule({
   declarations: [
     PanelComponent,
     LoginComponent, 
-    MenuComponent, ProfesionalesComponent, OpinionesComponent
+    MenuComponent, ProfesionalesComponent, OpinionesComponent, HeaderComponent
   ],
   imports: [
     CommonModule,

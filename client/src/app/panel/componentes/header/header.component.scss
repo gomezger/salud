@@ -1,0 +1,21 @@
+
+.titulo{
+    font-size: 25px;
+    padding-top: 15px;
+}
+
+.botones{
+}
+
+.botones .boton{
+    margin-top: -10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    border: solid rgb(202, 202, 202) 0.5px;
+}
+
+.botones .boton:hover{
+    border: solid rgb(7, 127, 163) 0.5px;
+    color: rgb(7, 127, 163);
+    background-color: unset;
+}
