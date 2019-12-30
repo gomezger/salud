@@ -10,11 +10,11 @@
     "require": {
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
+        "firebase/php-jwt": "3.0.0",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
-        "phpmailer/phpmailer": "^6.0",
         "laraveles/spanish": "^1.4",
-        "firebase/php-jwt": "3.0.0"
+        "phpmailer/phpmailer": "^6.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

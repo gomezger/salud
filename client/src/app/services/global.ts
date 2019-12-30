@@ -2,7 +2,7 @@
  * para maquina local
  */
 export let GLOBAL = {
- 	url_api: 'http://localhost:8000',
+ 	url_api: 'http://127.0.0.1:8000/',
  	url_storage: 'http://localhost:8000/storage/'
 };
 

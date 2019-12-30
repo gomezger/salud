@@ -12,7 +12,7 @@ use App\Helpers\JwtAuth;
 class ProfesionalController extends Controller{
 
    public function insertProfesional(Request $request){
-      $hash = $request->header('Authorization',null);
+      $hash = $request->input('Authorization',null);
       $jwtAuth = new JwtAuth();
       $checkToken = $jwtAuth->checkToken($hash);
 
@@ -24,7 +24,7 @@ class ProfesionalController extends Controller{
 
          //Validacion 
          $nombre=(!is_null($json) && isset($params->nombre)) ? $params->nombre : null;
-         $tipo_profesional=(!is_null($json) && isset($params->tipo_profesional)) ? $params->tipo_profesional : null;
+         $id_tipo=(!is_null($json) && isset($params->id_tipo)) ? $params->id_tipo : null;
          $email=(!is_null($json) && isset($params->email)) ? $params->email : null;
          $telefono=(!is_null($json) && isset($params->telefono)) ? $params->telefono : null;
          
@@ -35,7 +35,7 @@ class ProfesionalController extends Controller{
              //Reglas de validacion
             $validar= \Validator::make($params_array,[
                'nombre' => 'required',
-               'tipo_profesional'=> 'required',
+               'id_tipo'=> 'required',
                'email'=> 'required|email',
                'telefono' => 'required'
             ]);
@@ -55,7 +55,7 @@ class ProfesionalController extends Controller{
             }
 
             // verificar que existe el tipo de profesional
-            $tipo_profesional = TipoProfesional::find($tipo_profesional);
+            $tipo_profesional = TipoProfesional::find($id_tipo);
             if(is_null($tipo_profesional)){
 
                $data = array(
@@ -166,7 +166,7 @@ class ProfesionalController extends Controller{
             $data = array(
                'status' => 'error',
                'code' => 400,
-               'messages' => 'No hay datos por POST',
+               'errores' => ['No hay datos por POST'],
             );
             return response()->json($data,200); 
          }
@@ -175,7 +175,7 @@ class ProfesionalController extends Controller{
          $data = array(
             'status' => 'error',
             'code' => 400,
-            'messages' => 'Fallo autentificacion',
+            'errores' => ['No iniciaste sesión'],
          );
          return response()->json($data,200);         
       } 

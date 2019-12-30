@@ -40,4 +40,9 @@ export class UsuarioService {
       const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
       return this._http.post(this.url + '/usuarios/login/info', params, {'headers': headers});
   }
+
+
+  public getToken(){
+    return localStorage.getItem('token-panel');
+  }
 }

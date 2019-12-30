@@ -10,13 +10,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ProfesionalesComponent } from './profesionales/profesionales.component';
 import { OpinionesComponent } from './opiniones/opiniones.component';
 import { HeaderComponent } from './componentes/header/header.component';
+import { CrearEditarProfesionalComponent } from './profesionales/crear-editar-profesional/crear-editar-profesional.component';
 
 
 @NgModule({
   declarations: [
     PanelComponent,
     LoginComponent, 
-    MenuComponent, ProfesionalesComponent, OpinionesComponent, HeaderComponent
+    MenuComponent, ProfesionalesComponent, OpinionesComponent, HeaderComponent, CrearEditarProfesionalComponent
   ],
   imports: [
     CommonModule,
