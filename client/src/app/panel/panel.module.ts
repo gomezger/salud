@@ -17,7 +17,11 @@ import { CrearEditarProfesionalComponent } from './profesionales/crear-editar-pr
   declarations: [
     PanelComponent,
     LoginComponent, 
-    MenuComponent, ProfesionalesComponent, OpinionesComponent, HeaderComponent, CrearEditarProfesionalComponent
+    MenuComponent, 
+    ProfesionalesComponent, 
+    OpinionesComponent, 
+    HeaderComponent, 
+    CrearEditarProfesionalComponent
   ],
   imports: [
     CommonModule,

@@ -29,8 +29,7 @@
                     name="tipo" #tipo="ngModel" 
                     [(ngModel)]="profesional.id_tipo"
             >
-                <option value="5">Cuidador</option>
-                <option value="11">Enfermero</option>
+                <option *ngFor="let tipo of tipos" [value]="tipo.id">{{tipo.nombre}}</option>
             </select>
         </div>  
     </div>

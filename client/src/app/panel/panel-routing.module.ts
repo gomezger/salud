@@ -16,6 +16,7 @@ const routes: Routes = [
 	  children: [ 
 		{path: 'profesionales', component: ProfesionalesComponent }, 
 		{path: 'profesionales/crear', component: CrearEditarProfesionalComponent }, 
+		{path: 'profesionales/:id', component: CrearEditarProfesionalComponent }, 
 		{path: 'opiniones', component: OpinionesComponent } 
 	  ]  
 	},

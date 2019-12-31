@@ -27,11 +27,12 @@ Route::group(['middleware' => ['cors']], function () {
     
     //profesionales
     Route::post('/profesionales/insert/','ProfesionalController@insertProfesional');
-    Route::post('/profesionales/','ProfesionalController@getProfesionales');
+    Route::get('/profesionales/','ProfesionalController@getProfesionales');
+    Route::delete('/profesionales/eliminar/{id}','ProfesionalController@deleteProfesional');
 
     //tipo de profesionales
     Route::get('profesionales/tipos/', 'TipoProfesionalController@getTipoProfesionales');
     Route::post('profesionales/tipos/editar/{id}', 'TipoProfesionalController@update');
     Route::post('profesionales/tipos/insert', 'TipoProfesionalController@insert');
-    Route::post('profesionales/tipos/eliminar/{id}', 'TipoProfesionalController@delete');
+    Route::delete('profesionales/tipos/eliminar/{id}', 'TipoProfesionalController@delete');
 });

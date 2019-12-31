@@ -4,6 +4,7 @@ import { Profesional } from 'src/app/models/profesional';
 import * as $ from 'jquery';
 import { ProfesionalService } from 'src/app/services/profesional.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { TipoProfesional } from 'src/app/models/tipo-profesional';
 
 @Component({
   selector: 'app-crear-editar-profesional',
@@ -17,6 +18,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class CrearEditarProfesionalComponent implements OnInit {
   //atributos
   public profesional: Profesional;
+  public tipos: Array<TipoProfesional>;
   public errores: Array<String>;
   public success: String;
 
@@ -25,11 +27,37 @@ export class CrearEditarProfesionalComponent implements OnInit {
     public _usuarioService: UsuarioService
 
   ) { 
-
   }
 
   ngOnInit() {
     this.profesional = new Profesional(0,0,null,"","",null,"",null,"","",null,null);
+    this.getTipos();
+  }
+
+
+  getTipos(){
+    //verifico si hay una en cache
+    const tipos = localStorage.getItem('tipos_profesionales'); 
+    if (tipos !== null)
+      this.tipos = JSON.parse(tipos);
+
+    //busco una actualizacion en la base de datos
+    this._profesionalService.getTipos().subscribe(
+      response => {
+          if (response.status === 'success') {
+            //guardamos resultado
+            this.tipos = response.tipos_profesionales;
+
+            //guardamos resultado en cache
+            localStorage.setItem('tipos_profesionales',JSON.stringify(this.tipos));
+          } else {
+            this.errores = response.errores;  
+          }
+      },
+      error => {
+        this.errores = [error.message,"Error al cargar los tipos, recargue la pantalla y verifique su conexión a internet"];
+      }
+    );
   }
 
   /**
@@ -50,7 +78,7 @@ export class CrearEditarProfesionalComponent implements OnInit {
           }
       },
       error => {
-        console.log(error);
+        this.errores = [error.message, "Error al subir el profesional, recargue la pantalla y verifique su conexión a internet"];
       }
     );
   }

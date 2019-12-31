@@ -46,7 +46,7 @@ export class PanelComponent implements OnInit,DoCheck {
       if(actual>exp){
         this._route.navigate(['/panel/login']);
       }else{
-        this.nombre = dato.nombre;
+        this.nombre = dato.name;
         //la sesion esta ok
       }
 

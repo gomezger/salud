@@ -8,7 +8,7 @@ export class Profesional {
         public nombre: string,
         public imagen: string,
         public imagen_file: File,
-        public cv: string,
+        public CV: string,
         public cv_file: File,
         public email: string,
         public telefono: string,

@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit {
 
 
   constructor() { 
-    console.log(this.botones);
   }
 
   ngOnInit() {

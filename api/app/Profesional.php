@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\TipoProfesional;
+use App\Opinion;
 
 class Profesional extends Model
 {
     protected $table='profesional';
 
     public function tipo_profesional(){
-        return $this->belongTo('App\TipoProfesional');
+        return $this->HasOne('App\TipoProfesional','id','id_tipo');
     }
 
     public function opiniones(){
