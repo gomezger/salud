@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import { ProfesionalService } from 'src/app/services/profesional.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { TipoProfesional } from 'src/app/models/tipo-profesional';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-crear-editar-profesional',
@@ -19,19 +20,62 @@ export class CrearEditarProfesionalComponent implements OnInit {
   //atributos
   public profesional: Profesional;
   public tipos: Array<TipoProfesional>;
-  public errores: Array<String>;
-  public success: String;
+  public errores: Array<string>;
+  public success: string;
+  public titulo: string;
+  public editar: boolean;
 
   constructor(
     public _profesionalService: ProfesionalService,
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+		private _route: ActivatedRoute
 
   ) { 
   }
 
   ngOnInit() {
-    this.profesional = new Profesional(0,0,null,"","",null,"",null,"","",null,null);
+    this.editar = false;
+    this.verificarDestino();
     this.getTipos();
+  }
+
+  private getProfesional(id:number){
+
+    //busco una actualizacion en la base de datos
+    this._profesionalService.getProfesional(id).subscribe(
+      response => {
+          if (response.status === 'success') {
+            //guardamos resultado
+            this.profesional = response.profesional;
+          } else {
+            this.errores = response.errores;  
+          }
+      },
+      error => {
+        this.errores = [error.message,"Error al cargar el profesional, recargue la pantalla y verifique su conexión a internet"];
+      }
+    );
+  }
+
+  private verificarDestino(){
+    // busco el id de la noticia que esta en la url
+		this._route.params.subscribe(params => {
+			// agarro el parametro de la url
+      const id = params['id'];
+      
+      if(id!==undefined){
+        this.getProfesional(id);
+        this.titulo = "Editar Profesional";
+        this.editar = true;
+      }else{
+        this.profesional = new Profesional(0,0,null,"","",null,"",null,"","",null,null);
+        this.titulo = "Crear Profesional";
+      }
+
+		},
+		error => {
+      this.errores = [error.message,"Error al cargar los datos, recargue la pantalla y verifique su conexión a internet"];
+		});
   }
 
 
@@ -50,6 +94,9 @@ export class CrearEditarProfesionalComponent implements OnInit {
 
             //guardamos resultado en cache
             localStorage.setItem('tipos_profesionales',JSON.stringify(this.tipos));
+
+            //borramso errores
+            this.errores = null;
           } else {
             this.errores = response.errores;  
           }
@@ -65,6 +112,14 @@ export class CrearEditarProfesionalComponent implements OnInit {
    * @param profesionalForm Formulario
    */
   onSubmitProfesional(profesionalForm: Form){
+    if(this.editar){
+      this.update(profesionalForm);
+    }else{
+      this.create(profesionalForm);
+    }
+  }
+
+  create(profesionalForm: Form){
 
     // recupero el token
     const token:string = this._usuarioService.getToken();
@@ -73,6 +128,7 @@ export class CrearEditarProfesionalComponent implements OnInit {
       response => {
           if (response.status === 'success') {
             this.success = response.message;
+            this.errores = null;
           } else {
             this.errores = response.errores;  
           }
@@ -81,7 +137,30 @@ export class CrearEditarProfesionalComponent implements OnInit {
         this.errores = [error.message, "Error al subir el profesional, recargue la pantalla y verifique su conexión a internet"];
       }
     );
+
   }
+
+  update(profesionalForm: Form){
+
+    // recupero el token
+    const token:string = this._usuarioService.getToken();
+
+    this._profesionalService.update(this.profesional, token).subscribe(
+      response => {
+          if (response.status === 'success') {
+            this.success = response.message;
+            this.errores = null;
+          } else {
+            this.errores = response.errores;  
+          }
+      },
+      error => {
+        this.errores = [error.message, "Error al editar el profesional, recargue la pantalla y verifique su conexión a internet"];
+      }
+    );
+
+  }
+
 
   /**
    * Agregar la imagen al objeto profesional

@@ -196,7 +196,7 @@ class ProfesionalController extends Controller{
       $profesional = Profesional::where([['id', '=', $id]])->get()->first();
 
       if(!is_null($profesional)){
-         $profesional->load('tipo_profesional','opinion');
+         $profesional->load('tipo_profesional','opiniones');
          return response()->json(array(
             'profesional'=>$profesional,
             'status'=>'success'
@@ -206,7 +206,7 @@ class ProfesionalController extends Controller{
          //El profesional con ese id no existe
          
 			return response()->json(array(
-				'message' => 'El profesional no existe.',
+				'errores' => ['El profesional no existe'],
 				'status' => 'error'
 			), 200);
       }
@@ -218,7 +218,7 @@ class ProfesionalController extends Controller{
       $checkToken = $jwtAuth->checkToken($hash);
 
       if($checkToken){
-         //El toquen es valido
+
         
          //Recoger POST
          $json = $request->input('json',null);
@@ -227,7 +227,7 @@ class ProfesionalController extends Controller{
 
          //Validacion 
          $nombre=(!is_null($json) && isset($params->nombre)) ? $params->nombre : null;
-         $tipo_profesional=(!is_null($json) && isset($params->tipo_profesional)) ? $params->tipo_profesional : null;
+         $id_tipo=(!is_null($json) && isset($params->id_tipo)) ? $params->id_tipo : null;
          $email=(!is_null($json) && isset($params->email)) ? $params->email : null;
          $telefono=(!is_null($json) && isset($params->telefono)) ? $params->telefono : null;
 
@@ -237,7 +237,7 @@ class ProfesionalController extends Controller{
             //Validar atributos
             $validar= \Validator::make($params_array,[
                'nombre' => 'required',
-               'tipo_profesional'=> 'required',
+               'id_tipo'=> 'required',
                'email'=> 'required|email',
                'telefono' => 'required'
             ]);
@@ -255,7 +255,7 @@ class ProfesionalController extends Controller{
             }
 
             //Verificar que existe el tipo de profesional
-            $tipo_profesional = TipoProfesional::find($tipo_profesional);
+            $tipo_profesional = TipoProfesional::find($id_tipo);
             if(is_null($tipo_profesional)){
                $data = array(
                   'status' => 'error',
@@ -272,7 +272,7 @@ class ProfesionalController extends Controller{
             if(!is_null($imagen)){
    
                $validar=\Validator::make(["imagen"=>$imagen],[
-						'imagen' => 'mimes:jpeg,gif,png|required'
+						'imagen' => 'mimes:jpeg,gif,png'
                ]);
                if($validar->fails()){
                   $data = array(
@@ -289,22 +289,13 @@ class ProfesionalController extends Controller{
                   \Storage::disk('public')->put($imagen_new_path, \File::get($imagen));            
                }
             }
-            else{
-               $data = array(
-                  'status' => 'error',
-                  'code' => 400,
-                  'messages' => 'Campos no validos',
-                  'errores' => ['La imagen es obligatoria']
-               );
-               return response()->json($data,200);  
-            }
             
             //Recupero el cv
             $cv=$request->file('cv',null);
             //VALIDAR CV
             if(!is_null($cv)){
                $validar=\Validator::make(["cv"=>$cv],[
-                  'cv'=> 'required'
+                  'cv'=> ''
                ]);
                if($validar->fails()){
                   $data = array(
@@ -320,33 +311,25 @@ class ProfesionalController extends Controller{
                   $cv_new_path=time().$cv->hashName();
                   \Storage::disk('public')->put($cv_new_path, \File::get($cv));
                }
-            }else{
-               $data = array(
-                  'status' => 'error',
-                  'code' => 400,
-                  'messages' => 'Error CV',
-                  'errores' => ['No ingresó el cv']
-               );
-               return response()->json($data,200);   
             }
             
             //Actualizacion
             $profesional = Profesional::find($id);
 
             //Si existe el profesional
-            if(!isnull($profesional)){
+            if(!is_null($profesional)){
                $profesional->nombre=$nombre;
                $profesional->id_tipo=$tipo_profesional->id;
                $profesional->email=$email;
                $profesional->telefono=$telefono;
-               $profesional->imagen=$imagen_new_path;
-               $profesional->cv=$cv_new_path;
+               if(isset($imagen_new_path)) $profesional->imagen=$imagen_new_path;
+               if(isset($cv_new_path)) $profesional->cv=$cv_new_path;
                $profesional->save();
                $data = array(
                   'status' => 'success',
                   'profesional' => $profesional,
                   'code' => 200,
-                  'message' => 'Se agregó el nuevo profesional'
+                  'message' => 'Se editó el nuevo profesional'
                );
                return response()->json($data,200);     
 

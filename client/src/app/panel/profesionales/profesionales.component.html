@@ -5,6 +5,10 @@
 ></header>
 
 
+<input class="filtro" type="text" placeholder="filter" [(ngModel)]="filter" (input)="filtrar()"
+placeholder="Filtrar por nombre o correo">
+
+
 <table *ngIf="profesionales" class="table">
     <thead class="thead-light">
         <tr>
@@ -18,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let profesional of profesionales | paginate: { itemsPerPage: 5, currentPage: p }">
+        <ng-container *ngFor="let profesional of profesionales | paginate: { itemsPerPage: 10, currentPage: p }">
             <!-- DATOS PRINCIPALES  -->
             <tr>
                 <th scope="row">
@@ -34,11 +38,11 @@
                 <td>{{profesional.email}}</td>
                 <td>{{profesional.created_at | date:'d-MM-yy HH:mm'}}hs</td>
                 <td>
-                    <a class="btn btn-link p-0" role="button" [routerLink]="[profesional.id]"><i class="far fa-edit mr-2"></i></a>
-                    <a class="btn btn-link p-0" attr.data-target="#eliminar-{{profesional.id}}" data-toggle="collapse" 
+                    <a class="btn text-info p-0" role="button" [routerLink]="[profesional.id]"><i class="far fa-edit ml-1 mr-1"></i></a>
+                    <button class="btn text-info p-0" attr.data-target="#eliminar-{{profesional.id}}" data-toggle="collapse" 
                         aria-expanded="false" attr.aria-controls="#eliminar-{{profesional.id}}">
-                        <i class="far fa-trash-alt mr-2"></i>
-                    </a>
+                        <i class="far fa-trash-alt ml-1 mr-1"></i>
+                    </button>
                 </td>
             </tr>
             <!-- DATOS EXTRAS  -->

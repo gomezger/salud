@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Boton } from 'src/app/models/boton';
 import { Profesional } from 'src/app/models/profesional';
+import { TipoProfesional } from 'src/app/models/tipo-profesional';
 import { ProfesionalService } from 'src/app/services/profesional.service';
 import { GLOBAL } from 'src/app/services/global';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -16,6 +17,7 @@ export class ProfesionalesComponent implements OnInit {
   public profesionales: Array<Profesional>;
   public errores: Array<String>;
   public url_storage: string;
+	public filter: string = '';
 
   constructor(
     public _profesionalService: ProfesionalService,
@@ -28,6 +30,26 @@ export class ProfesionalesComponent implements OnInit {
     this.getProfesionales();
   }
 
+  // filtrar productos por nombre o codigo
+  filtrar() {
+    let prof = [];
+    this.profesionales.forEach((element) => {
+      if (
+        element.nombre.toLowerCase().search(this.filter.toLowerCase()) !== -1 ||
+        element.email.toLowerCase().search(this.filter.toLowerCase()) !== -1
+      ) {
+        prof.push(element);
+      }
+    });
+
+    this.profesionales = prof;
+
+    if(this.filter=='')
+      this.getProfesionales();
+
+  }
+
+
   eliminar(profesional: Profesional){
 
     // recupero el token
@@ -38,6 +60,12 @@ export class ProfesionalesComponent implements OnInit {
           if (response.status === 'success') {
             $('.preguntar-eliminar-'+profesional.id).addClass('d-none');
             $('.mensaje-eliminar-'+profesional.id).removeClass('d-none');
+
+            // sacar pedido del inicio en 6 segundos
+            setTimeout(() => {
+              this.getProfesionales();
+            }, 3000);
+
           } else {
             this.errores = response.errores;  
           }
