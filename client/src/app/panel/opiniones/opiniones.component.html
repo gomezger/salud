@@ -1,1 +1,64 @@
-<p>opiniones works!</p>
+<header 
+    titulo="Opiniones"
+    icono="fas fa-comments"
+></header>
+
+
+
+
+<!-- <input class="filtro" type="text" placeholder="filter" [(ngModel)]="filter" (input)="filtrar()"
+placeholder="Filtrar por nombre o correo"> -->
+
+
+<table *ngIf="opiniones" class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th>Profesional</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let opinion of opiniones | paginate: { itemsPerPage: 10, currentPage: p }">
+            <!-- DATOS PRINCIPALES  -->
+            <tr>
+                <th scope="row">
+                    <i 
+                        class="fas fa-chevron-right" data-toggle="collapse" 
+                        attr.data-target="#opinion-{{opinion.id}}" aria-expanded="false" 
+                        attr.aria-controls="#opinion-{{opinion.id}}"
+                    ></i>
+                </th>
+                <td class="text-info">{{opinion.profesional.nombre}}</td>
+                <td>{{opinion.nombre}}</td>
+                <td>{{opinion.email}}</td>
+                <td>{{opinion.telefono}}</td>
+                <td>{{opinion.created_at | date:'d-MM-yy HH:mm'}}hs</td>
+                <td>
+                    <!-- Default switch -->
+                    <div  class="custom-control custom-switch">
+                        <input (click)="cambiarEstado(opinion)" *ngIf="!opinion.aprobado" type="checkbox" class="custom-control-input" id="customSwitches">
+                        <input (click)="cambiarEstado(opinion)" *ngIf="opinion.aprobado" type="checkbox" class="custom-control-input" id="customSwitches" checked>
+                        <label class="custom-control-label" for="customSwitches"></label>
+                    </div>
+                </td>
+            </tr>
+            <!-- DATOS EXTRAS  -->
+            <tr class="collapse" attr.id="opinion-{{opinion.id}}">
+                <th scope="row" colspan="1"></th>
+                <td colspan="6" class="text-center">
+                    {{opinion.descripcion}}
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+<div class="col-12 text-center">
+    <pagination-controls class="pagination clearfix d-inline-block mt-4" (pageChange)="p = $event" autoHide="true" responsive="true"
+    directionLinks="true" previousLabel="Anterior" nextLabel="Siguiente" maxSize="4"></pagination-controls>
+</div>
+

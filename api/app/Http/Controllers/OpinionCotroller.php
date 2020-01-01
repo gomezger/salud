@@ -12,6 +12,16 @@ use App\Helpers\JwtAuth;
 class OpinionCotroller extends Controller
 {
 
+    public function getOpiniones(){
+        
+        $opiniones= Opinion::orderBy('id','desc')->get()->load('profesional');       
+        
+        return response()->json(array(
+           'opiniones' => $opiniones,
+           'status'=>'success'
+        ),200);
+     }
+
     public function insertOpinion(Request $request){
         $hash = $request->header('Authorization',null);
         $jwtAuth = new JwtAuth();
@@ -140,7 +150,7 @@ class OpinionCotroller extends Controller
             $telefono=(!is_null($json) && isset($params->telefono)) ? $params->telefono : null;
             $descripcion=(!is_null($json) && isset($params->descripcion)) ? $params->descripcion : null;
             $aprobado=(!is_null($json) && isset($params->aprobado)) ? $params->aprobado : null;
-            $profesional=(!is_null($json) && isset($params->profesional)) ? $params->profesional : null;
+            $id_profesional=(!is_null($json) && isset($params->id_profesional)) ? $params->id_profesional : null;
 
             //chequeamos que tengamos datos por POST
             if(!is_null($params_array)){
@@ -150,7 +160,7 @@ class OpinionCotroller extends Controller
                     'telefono' => 'required',
                     'descripcion'=>'required',
                     'aprobado'=>'required',
-                    'profesional'=>'required'
+                    'id_profesional'=> 'required'
                  ]);
 
                  //si hay errores envio el error
@@ -165,8 +175,8 @@ class OpinionCotroller extends Controller
                      return response()->json($data,200);  
                  }
                  // verificar que existe el profesional
-                 $profesional = Profesional::find($profesional);
-                 if(is_null($tipo_profesional)){
+                 $profesional = Profesional::find($id_profesional);
+                 if(is_null($profesional)){
                     $data = array(
                         'status' => 'error',
                         'code' => 400,
@@ -178,22 +188,22 @@ class OpinionCotroller extends Controller
 
                  //Busco la opinion 
                  $opinion =Opinion::find($id);
-                 if(!isnull($$opinion)){
+                 if(!is_null($opinion)){
 
                     $opinion->nombre=$nombre;
                     $opinion->email=$email;
                     $opinion->telefono=$telefono;
-                    $opinion->descripcio=$descripcion;
+                    $opinion->descripcion=$descripcion;
                     $opinion->aprobado=$aprobado;
-                    $opinion->id_profesional=$profesional;
+                    $opinion->id_profesional=$id_profesional;
 
                     $opinion->save();
                     $opinion->load('profesional');
                     $data = array(
-                    'status' => 'success',
-                    'opinion' => $opinion,
-                    'code' => 200,
-                    'message' => 'Se agregó la nueva opinion'
+                        'status' => 'success',
+                        'opinion' => $opinion,
+                        'code' => 200,
+                        'message' => 'Se agregó la nueva opinion'
                     );
                     return response()->json($data,200); 
                 }else{
