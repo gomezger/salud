@@ -35,5 +35,12 @@ export class OpinionService {
   }
 
 
+  public delete(opinion: Opinion, token: string): Observable<any> {          
+        
+    //creo headers
+    const headers = new HttpHeaders().set('Authorization', token);
+
+    return this._http.delete(this.url + 'opiniones/delete/'+opinion.id, { 'headers' : headers });
+  }
 
 }

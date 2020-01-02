@@ -38,8 +38,7 @@ class OpinionCotroller extends Controller
             $email=(!is_null($json) && isset($params->email)) ? $params->email : null;
             $telefono=(!is_null($json) && isset($params->telefono)) ? $params->telefono : null;
             $descripcion=(!is_null($json) && isset($params->descripcion)) ? $params->descripcion : null;
-            $aprobado=(!is_null($json) && isset($params->aprobado)) ? $params->aprobado : null;
-            $profesional=(!is_null($json) && isset($params->profesional)) ? $params->profesional : null;
+            $id_profesional=(!is_null($json) && isset($params->id_profesional)) ? $params->id_profesional : null;
 
             //chequeamos que tengamos datos por POST
             if(!is_null($params_array)){
@@ -48,8 +47,7 @@ class OpinionCotroller extends Controller
                     'email'=> 'required|email',
                     'telefono' => 'required',
                     'descripcion'=>'required',
-                    'aprobado'=>'required',
-                    'profesional'=>'required'
+                    'id_profesional'=>'required'
                  ]);
 
                  //si hay errores envio el error
@@ -64,8 +62,8 @@ class OpinionCotroller extends Controller
                      return response()->json($data,200);  
                  }
                  // verificar que existe el profesional
-                 $profesional = Profesional::find($profesional);
-                 if(is_null($tipo_profesional)){
+                 $profesional = Profesional::find($id_profesional);
+                 if(is_null($profesional)){
                     $data = array(
                         'status' => 'error',
                         'code' => 400,
@@ -80,9 +78,8 @@ class OpinionCotroller extends Controller
                  $opinion->nombre=$nombre;
                  $opinion->email=$email;
                  $opinion->telefono=$telefono;
-                 $opinion->descripcio=$descripcion;
-                 $opinion->aprobado=$aprobado;
-                 $opinion->id_profesional=$profesional;
+                 $opinion->descripcion=$descripcion;
+                 $opinion->id_profesional=$id_profesional;
 
                  $opinion->save();
                  $opinion->load('profesional');
@@ -255,7 +252,7 @@ class OpinionCotroller extends Controller
             // mensaje de retorno
             $data = array(
                 'status' => 'success',
-                'profesional' => $profesional,
+                'opinion' => $opinion,
                 'code' => 200,
                 'message' => 'Se eliminó la opinion'
             );
