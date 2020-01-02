@@ -14,19 +14,22 @@ class ProfesionalMigration extends Migration
     public function up()
     {
         Schema::create('profesional', function (Blueprint $table) {
-            $table->integer('id_tipo')->unsigned();
 
-            $table->bigIncrements('id');
+            $table->increments('id');
+            $table->integer('id_tipo')->nullable()->unsigned();
             $table->string('nombre',100);
-            $table->foreign('id_tipo')
-                ->references('id')->on('tipo_profesional')
-                ->onDelete('cascade');
             $table->text('imagen');
             $table->text('CV');
             $table->string('email',100);
-            $table->string('telefono',100);
-            $table->timestamps();
+            $table->string('telefono',100);               
+             $table->timestamps();      
+
+             $table->engine = 'InnoDB';	
+             $table->charset = 'utf8';
+             $table->collation = 'utf8_unicode_ci';	
+
         });
+        
     }
 
     /**

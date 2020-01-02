@@ -14,9 +14,15 @@ class TipoProfesionalMigration extends Migration
     public function up()
     {
         Schema::create('tipo_profesional', function (Blueprint $table) {
-            $table->bigIncrements('id');
+
+            $table->increments('id');
             $table->string('nombre',100);
             $table->timestamps();
+            
+			$table->engine = 'InnoDB';	
+			$table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';			
+            
         });
     }
 
