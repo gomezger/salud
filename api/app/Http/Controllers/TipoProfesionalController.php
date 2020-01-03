@@ -9,6 +9,33 @@ use App\Helpers\JwtAuth;
 
 class TipoProfesionalController extends Controller
 {
+    
+    /**
+     * Retorna todos los tipos de profesionales
+     */
+    public function getTipoProfesional($id){
+        // Buscamos los tipo de profesionales
+        $tipo = TipoProfesional::find($id);
+
+        // Verificar si no es nulo
+        if(is_null($tipo)){        
+            $data = array(
+                'status' => 'error',
+                'errores' => ['No existe el tipo'],
+                'code' => 200
+            );
+        }else{
+            $data = array(
+                'status' => 'success',
+                'tipo_profesional' => $tipo,
+                'code' => 200
+            );
+        }
+
+        return $data;
+    }
+
+
     /**
      * Retorna todos los tipos de profesionales
      */
@@ -154,7 +181,7 @@ class TipoProfesionalController extends Controller
                         'status' => 'success',
                         'tipo_profesional' => $tipo,
                         'code' => 200,
-                        'message' => 'Se agregó el nuevo tipo de profesional'
+                        'message' => 'Se editó el nuevo tipo de profesional'
                     );
 
                   }else{

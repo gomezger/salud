@@ -12,6 +12,7 @@ import { OpinionesComponent } from './opiniones/opiniones.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { CrearEditarProfesionalComponent } from './profesionales/crear-editar-profesional/crear-editar-profesional.component';
 import { TipoProfesionalesComponent } from './tipo-profesionales/tipo-profesionales.component';
+import { CrearEditarTipoComponent } from './tipo-profesionales/crear-editar-tipo/crear-editar-tipo.component';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { TipoProfesionalesComponent } from './tipo-profesionales/tipo-profesiona
     ProfesionalesComponent, 
     OpinionesComponent, 
     HeaderComponent, 
-    CrearEditarProfesionalComponent, TipoProfesionalesComponent
+    CrearEditarProfesionalComponent, TipoProfesionalesComponent, CrearEditarTipoComponent
   ],
   imports: [
     CommonModule,

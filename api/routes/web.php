@@ -34,6 +34,7 @@ Route::group(['middleware' => ['cors']], function () {
 
     //tipo de profesionales
     Route::get('profesionales/tipos/', 'TipoProfesionalController@getTipoProfesionales');
+    Route::get('profesionales/tipos/{id}', 'TipoProfesionalController@getTipoProfesional');
     Route::post('profesionales/tipos/editar/{id}', 'TipoProfesionalController@update');
     Route::post('profesionales/tipos/insert', 'TipoProfesionalController@insert');
     Route::delete('profesionales/tipos/eliminar/{id}', 'TipoProfesionalController@delete');

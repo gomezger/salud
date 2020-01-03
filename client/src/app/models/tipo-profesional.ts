@@ -1,8 +1,8 @@
 export class TipoProfesional { 
     constructor(
-        id: number,
-        nombre: string,
-        created_at: Date,
-        updated_at: Date
+        public id: number,
+        public nombre: string,
+        public created_at: Date,
+        public updated_at: Date
     ){ }
 }
