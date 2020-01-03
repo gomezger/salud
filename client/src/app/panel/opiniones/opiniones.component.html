@@ -47,9 +47,9 @@ placeholder="Filtrar por profesional o cliente">
                     <td>
                         <!-- Default switch -->
                         <div  class="btn text-info custom-control custom-switch d-inline-block">
-                            <input (click)="cambiarEstado(opinion)" *ngIf="!opinion.aprobado" type="checkbox" class="custom-control-input" id="customSwitches">
-                            <input (click)="cambiarEstado(opinion)" *ngIf="opinion.aprobado" type="checkbox" class="custom-control-input" id="customSwitches" checked>
-                            <label class="custom-control-label" for="customSwitches"></label>
+                            <input (click)="cambiarEstado(opinion)" *ngIf="!opinion.aprobado" type="checkbox" class="custom-control-input" [id]="'customSwitches-'+opinion.id">
+                            <input (click)="cambiarEstado(opinion)" *ngIf="opinion.aprobado" type="checkbox" class="custom-control-input" [id]="'customSwitches-'+opinion.id" checked>
+                            <label class="custom-control-label" [for]="'customSwitches-'+opinion.id"></label>
                         </div>
                         <button class="btn text-info p-0 m-0 d-inline-block" attr.data-target="#eliminar-{{opinion.id}}" data-toggle="collapse" 
                             aria-expanded="false" attr.aria-controls="#eliminar-{{opinion.id}}">
