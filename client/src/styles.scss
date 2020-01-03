@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+// eliminar recuadro azul en inputs
+input:focus, input.form-control:focus {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+// Filtrar bsuqueda en panel de control
+.filtro {
+	margin-bottom: 10px;
+	width: 300px !important;
+	padding: 5px !important;
+	border: none !important;
+	border-bottom: 1px solid #687d94 !important;
+	border-radius: 0px !important;
+	text-align: left !important;
+}

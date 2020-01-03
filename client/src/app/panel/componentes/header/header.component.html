@@ -1,0 +1,9 @@
+<div class="titulo d-inline-block"><i [className]="icono+' mr-2 d-none'"></i>{{titulo}}</div>
+
+<div *ngIf="botones && botones.length>0" class="botones d-md-inline-block ml-md-4">
+    <a *ngFor="let boton of botones" class="btn btn-light boton" [routerLink]="[boton[1]]" role="button">
+        {{boton[0]}}
+    </a>
+</div>
+
+<hr/>

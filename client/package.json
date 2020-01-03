@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "prod:upload": "ng build --buildOptimizer=true --optimization=true --prod --base-href https://cuidarsaludarg.com/"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +22,8 @@
     "@angular/router": "^8.2.13",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
+    "mdbootstrap": "^4.11.0",
+    "ngx-pagination": "^5.0.0",
     "popper.js": "^1.16.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

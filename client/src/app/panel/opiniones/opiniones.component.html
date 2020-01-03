@@ -1,0 +1,95 @@
+<header 
+    titulo="Opiniones"
+    icono="fas fa-comments"
+></header>
+
+
+
+
+<input class="filtro" type="text" placeholder="filter" [(ngModel)]="filter" (input)="filtrar()"
+placeholder="Filtrar por profesional o cliente">
+                 
+<div *ngIf="errores" class="errores col-12 p-0">
+    <div *ngFor="let error of errores " class="error alert-danger alert text-center">
+        {{ error }}
+    </div>
+</div>
+
+<div class="div-tabla table-responsive">
+    <table *ngIf="opiniones" class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th>Profesional</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let opinion of opiniones | paginate: { itemsPerPage: 10, currentPage: p }">
+                <!-- DATOS PRINCIPALES  -->
+                <tr>
+                    <th scope="row">
+                        <i 
+                            class="fas fa-chevron-right" data-toggle="collapse" 
+                            attr.data-target="#opinion-{{opinion.id}}" aria-expanded="false" 
+                            attr.aria-controls="#opinion-{{opinion.id}}"
+                        ></i>
+                    </th>
+                    <td class="text-info">{{opinion.profesional.nombre}}</td>
+                    <td>{{opinion.nombre}}</td>
+                    <td>{{opinion.email}}</td>
+                    <td>{{opinion.telefono}}</td>
+                    <td>{{opinion.created_at | date:'d-MM-yy HH:mm'}}hs</td>
+                    <td>
+                        <!-- Default switch -->
+                        <div  class="btn text-info custom-control custom-switch d-inline-block">
+                            <input (click)="cambiarEstado(opinion)" *ngIf="!opinion.aprobado" type="checkbox" class="custom-control-input" [id]="'customSwitches-'+opinion.id">
+                            <input (click)="cambiarEstado(opinion)" *ngIf="opinion.aprobado" type="checkbox" class="custom-control-input" [id]="'customSwitches-'+opinion.id" checked>
+                            <label class="custom-control-label" [for]="'customSwitches-'+opinion.id"></label>
+                        </div>
+                        <button class="btn text-info p-0 m-0 d-inline-block" attr.data-target="#eliminar-{{opinion.id}}" data-toggle="collapse" 
+                            aria-expanded="false" attr.aria-controls="#eliminar-{{opinion.id}}">
+                            <i class="far fa-trash-alt ml-1 mr-1"></i>
+                        </button>
+                    </td>
+                </tr>
+                <!-- DATOS EXTRAS  -->
+                <tr class="collapse opinion" attr.id="opinion-{{opinion.id}}">
+                    <th scope="row" colspan="1"></th>
+                    <td colspan="6" class="text-center opinion">
+                        "<em>{{opinion.descripcion}}</em>"
+                    </td>
+                </tr>
+                <!-- ELIMINAR  -->
+                <tr class="collapse" attr.id="eliminar-{{opinion.id}}">
+                    <td colspan="7" class="text-center">
+                        <div [className]="'preguntar-eliminar preguntar-eliminar-'+opinion.id">
+                            <span>¿Seguro queres eliminar la opinion de <b>{{opinion.nombre}}</b>? </span>
+                            <button (click)="eliminar(opinion)" type="button" class="ml-5 btn btn-danger boton">
+                                Eliminar
+                            </button>
+                            <button type="button" class="ml-5 btn btn-secondary boton"
+                                    attr.data-target="#eliminar-{{opinion.id}}" data-toggle="collapse" 
+                                    aria-expanded="false" attr.aria-controls="#eliminar-{{opinion.id}}">
+                                Cancelar
+                            </button>
+                        </div>
+
+                        <div [className]="'d-none mensaje-eliminar alert alert-success mensaje-eliminar-'+opinion.id">La opinión de {{opinion.nombre}} fue eliminada </div>
+
+                    
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+<div class="col-12 text-center">
+    <pagination-controls class="pagination clearfix d-inline-block mt-4" (pageChange)="p = $event" autoHide="true" responsive="true"
+    directionLinks="true" previousLabel="Anterior" nextLabel="Siguiente" maxSize="4"></pagination-controls>
+</div>
+
