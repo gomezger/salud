@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         ];
 
         $db = DB::table('informacion')->insert($cond);
-        
+
 
         //agregar usuarios
 		$cond = [

@@ -11,6 +11,7 @@ import { ProfesionalesComponent } from './profesionales/profesionales.component'
 import { OpinionesComponent } from './opiniones/opiniones.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { CrearEditarProfesionalComponent } from './profesionales/crear-editar-profesional/crear-editar-profesional.component';
+import { TipoProfesionalesComponent } from './tipo-profesionales/tipo-profesionales.component';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { CrearEditarProfesionalComponent } from './profesionales/crear-editar-pr
     ProfesionalesComponent, 
     OpinionesComponent, 
     HeaderComponent, 
-    CrearEditarProfesionalComponent
+    CrearEditarProfesionalComponent, TipoProfesionalesComponent
   ],
   imports: [
     CommonModule,
