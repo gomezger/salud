@@ -1,1 +1,45 @@
-<p>header works!</p>
+<header class="clearfix">
+    <div class="container">
+        <h1 class="slogan float-left ml-1 ml-md-0">Lorem ipsum dolor sit amet</h1>
+
+        <div class="derecha float-right">
+            <div class="info float-left mr-4 d-none d-md-inline-block"><i class="fas fa-map-marker-alt mr-1"></i> Bahía Blanca</div>
+            <div class="info float-left mr-4 d-none d-md-inline-block"><i class="fas fa-phone mr-1"></i> 0291 154740270</div>
+
+
+            <div class="redes float-left mr-1 mr-md-0">
+                <a href="#" class="text-light mr-2 mr-md-2" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                <a href="#" class="text-light mr-2 mr-md-2" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-light" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<nav class="navbar navbar-expand-lg sticky-top  navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" [routerLink]="['/']">
+            <img class="d-none d-md-inline-block" src="assets/logo-largo.png"/>
+            <img class="d-md-none" src="assets/logo-solo.png"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto text-center">
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/']">Inicio</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/profesionales']">Profesionales</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/sumate']">Sumate</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" [routerLink]="['/contacto']">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
