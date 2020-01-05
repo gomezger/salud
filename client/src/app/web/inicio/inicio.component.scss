@@ -2,12 +2,15 @@ section.nosotros{
 	width: 100%;
 	padding: 50px 0;
 	float: left;
+	position: relative;
+	background-color: #f8fbfb60;
 }
 
 section.nosotros .imagen{
 	width: 600px;
 	max-width: 50%;
 	float: left;
+	opacity: 0.9;
 }
 
 section.nosotros .descripcion{
@@ -34,10 +37,13 @@ section.nosotros .descripcion .borde{
 }
 
 section.nosotros .descripcion p{
-	line-height: 33px;
-	
+	line-height: 33px;	
 	float: left;
 	clear: both;
+}
+
+section.botones{
+    background-color: #1e6cd1;
 }
 
 @media (max-width: 1650px) {
