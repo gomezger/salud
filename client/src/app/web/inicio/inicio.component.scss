@@ -11,6 +11,8 @@ section.nosotros .imagen{
 	max-width: 50%;
 	float: left;
 	opacity: 0.9;
+	max-height: 350px;
+	overflow: hidden;
 }
 
 section.nosotros .descripcion{
@@ -35,6 +37,10 @@ section.nosotros .descripcion .borde{
 	margin-bottom: 30px;
 	width: 40px;
 }
+section.nosotros .descripcion .borde.corto{
+	width: 20px;
+	opacity: 0.7;
+}
 
 section.nosotros .descripcion p{
 	line-height: 33px;	
@@ -42,9 +48,83 @@ section.nosotros .descripcion p{
 	clear: both;
 }
 
-section.botones{
-    background-color: #1e6cd1;
+
+section#botones{
+	width: 100%;
+	float: left;
+	clear: both;
+	background-color: #1e7e710e;
+	margin-bottom: 20px;
+	padding: 40px;
+	border-radius: 5px;
 }
+
+section#botones .columna{
+	width: 49%;
+	float: left;
+	background-color: white;
+	padding: 1em;
+	border-radius: 0.3em;
+	padding-left: 25%;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+	border: solid 1px #EEE;
+}
+section#botones .columna:hover{
+	-webkit-box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+    box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+}
+
+section#botones .boton1{
+	background-image: url('/assets/imagen1.png');
+	margin-right: 1%;
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-size: 90% auto !important;
+}
+section#botones .boton2{
+	background-position: left bottom !important;
+	background-repeat: no-repeat;
+	background-size: 125% auto !important;
+	background-image: url('/assets/imagen2b.png');
+	margin-left: 1%;
+}
+
+section#botones .columna .epigrafe{
+	text-transform: uppercase;
+	font-size: 13px;
+	letter-spacing: 7px;	
+	margin: 20px 0;
+	color: #222;
+	float: left;
+	clear: both;
+}
+section#botones .columna .titulo{
+	text-transform: uppercase;
+	font-size: 25px;
+	letter-spacing: 0.2em;
+	margin-bottom: 1em;
+	float: left;
+	clear: both;
+	color: #222;
+}
+
+
+section#botones .columna .boton{
+	text-transform: uppercase;
+	font-size: 0.8em;
+	letter-spacing: 0.2em;
+	float: left;
+	clear: both;
+	background-color:#99ba65;
+	text-decoration: none;
+	padding: 0.5em 1em;
+	margin-bottom: 20px;
+	color: white;
+	border-radius: 0.3em;
+	border: solid 0.05em #CCC;
+}
+
 
 @media (max-width: 1650px) {
 
@@ -69,8 +149,82 @@ section.botones{
 /* Large Mobile : 480px. */
 
 @media only screen and (max-width: 767px) {
+	section.nosotros{
+		padding: 25px 0;
+	}
+
 	section.nosotros .descripcion{
 		max-width: 100%;
+	}
+
+	section#botones{
+		width: 100%;
+		margin: 0em 0;
+		padding: 0;
+		padding-top: 20px;
+	}
+
+	section#botones .columna{
+		width: 100%;
+		float: left;
+		clear: both;
+		margin: 0;
+		margin-bottom: 1em;
+		text-align: right;
+	}
+	section#botones .columna:hover{
+		-webkit-box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+		box-shadow: 0 7px 16px 0 rgba(0,0,0,.2), 0 1px 3px 0 rgba(0,0,0,.1);
+	}
+
+	section#botones .boton1{
+		margin-right: 0%;
+		background-size: auto 100%  !important;
+		background-position: center left;
+	}
+	section#botones .boton2{
+		margin-right: 0%;
+		background-size: auto 150%  !important;
+		background-position: center left;
+	}
+
+	section#botones .columna .epigrafe{
+		text-transform: uppercase;
+		font-size: 0.75em;
+		letter-spacing: 0.4em;	
+		margin: 1em 0;
+		color: #222;
+		float: right;
+		clear: both;
+	}
+
+	span.blanco{
+		background-color: rgba(255, 255, 255, 0.829);
+		padding-left: 5px;
+	}
+
+	section#botones .columna .titulo{
+		text-transform: uppercase;
+		font-size: 21px;
+		letter-spacing: 0.2em;
+		margin-bottom: 1em;
+		float: right;
+		clear: both;
+		color: #222;
+	}
+
+
+	section#botones .columna .boton{
+		text-transform: uppercase;
+		font-size: 0.8em;
+		letter-spacing: 0.2em;
+		float: right;
+		clear: both;
+		text-decoration: none;
+		padding: 0.5em 1em;
+		color: white;
+		border-radius: 0.3em;
+		border: solid 0.05em #CCC;
 	}
 }
 

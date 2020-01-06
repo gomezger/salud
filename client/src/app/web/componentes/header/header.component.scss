@@ -47,3 +47,18 @@ header .info{
     border-bottom: solid 2px #2f89fc;
     transition: 0.5s;
 }
+
+
+/* Large Mobile : 480px. */
+
+@media only screen and (max-width: 767px) {    
+    .navbar .navbar-brand img{
+        height: 55px;
+    }
+}
+
+/* Small Mobile : 320px. */
+
+@media only screen and (max-width: 479px) {
+
+}
