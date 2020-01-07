@@ -91,6 +91,7 @@ section#botones .boton2{
 }
 
 section#botones .columna .epigrafe{
+	font-weight: normal;
 	text-transform: uppercase;
 	font-size: 13px;
 	letter-spacing: 7px;	
@@ -100,6 +101,7 @@ section#botones .columna .epigrafe{
 	clear: both;
 }
 section#botones .columna .titulo{
+	font-weight: normal;
 	text-transform: uppercase;
 	font-size: 25px;
 	letter-spacing: 0.2em;
@@ -123,6 +125,12 @@ section#botones .columna .boton{
 	color: white;
 	border-radius: 0.3em;
 	border: solid 0.05em #CCC;
+}
+
+
+section#botones .columna .boton:hover{
+	background-color:#267ef1;
+    transition: 0.4s;
 }
 
 
