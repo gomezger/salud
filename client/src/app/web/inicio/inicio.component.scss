@@ -134,11 +134,28 @@ section#botones .columna .boton:hover{
 }
 
 
-@media (max-width: 1650px) {
+@media (max-width: 1410px) {
+	
+	section#botones .columna .epigrafe{
+		font-size: 11px;
+	}
 
+	section#botones .columna .titulo{
+		font-size: 22px;
+	}
 }
 
 @media only screen and (min-width: 1100px) and (max-width: 1400px) {
+	section#botones .columna .epigrafe{
+		font-size: 10px;
+	}
+
+	section#botones .columna .titulo{
+		font-size: 20px;
+	}
+	section#botones .columna .boton{
+		font-size: 11px;
+	}
 }
 
 
@@ -146,24 +163,22 @@ section#botones .columna .boton:hover{
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 	
+	section#botones .columna .epigrafe{
+		font-size: 10px;
+	}
+
+	section#botones .columna .titulo{
+		font-size: 20px;
+	}
+	section#botones .columna .boton{
+		font-size: 11px;
+	}
+	
 }
 
 /* Tablet : 768px. */
 
 @media only screen and (max-width: 991px) {	
-
-}
-
-/* Large Mobile : 480px. */
-
-@media only screen and (max-width: 767px) {
-	section.nosotros{
-		padding: 25px 0;
-	}
-
-	section.nosotros .descripcion{
-		max-width: 100%;
-	}
 
 	section#botones{
 		width: 100%;
@@ -234,6 +249,19 @@ section#botones .columna .boton:hover{
 		border-radius: 0.3em;
 		border: solid 0.05em #CCC;
 	}
+}
+
+/* Large Mobile : 480px. */
+
+@media only screen and (max-width: 767px) {
+	section.nosotros{
+		padding: 25px 0;
+	}
+
+	section.nosotros .descripcion{
+		max-width: 100%;
+	}
+
 }
 
 /* Small Mobile : 320px. */
