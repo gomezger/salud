@@ -1,20 +1,26 @@
 footer{
-    background-color: #f5f5f5;
-    color: #40514e;
+    margin-top: 100px;
+    padding: 50px 0;
+    background-color: #1e6cd1;
+    color: #FEFEFE;
     float: left;
     clear: both;
-    border-top: solid 8px #99ba657a;
+    border-top: solid 4px #2f89fc;
+}
+
+footer.page-footer li{
+    margin-bottom: 10px;
 }
 
 a{
-    color: #40514e;
+    color: #FEFEFE;
 }
 
+a:hover{
+    color: #FEFEFE;
+}
 footer .footer-copyright{
-    color: #FEFEFE;
-    background-color: #1e6cd1;
-}
-
-footer .footer-copyright a{
-    color: #FEFEFE;
+    background-color: #303f3c;
+    border-top: solid 1pxrgba(153, 186, 101, 0.116)b;
+    font-size: 14px;
 }
