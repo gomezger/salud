@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { WebRoutingModule } from './web-routing.module';
 import { WebComponent } from './web.component';
+import { ProfesionalesComponent } from './profesionales/profesionales.component';
 
 
 @NgModule({
   declarations: [
-    WebComponent
+    WebComponent,
+    ProfesionalesComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,35 @@
+<section class="text-center" *ngIf="(tipoProfesionales==null || ListaProfesionales==null)">
+    <div class="spinner-grow text-success" style="margin-top: 32vh; width: 10rem; height: 10rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</section>
+
+<div *ngIf="errores" class="errores col-12 p-0">
+    <div *ngFor="let error of errores " class="error alert-danger alert text-center">
+        {{ error }}
+    </div>
+</div>
+
+<section *ngIf="(tipoProfesionales!=null && ListaProfesionales!=null)"  class="container">
+
+    <div class="btn-group pt-3">
+        <button type="button" class=" boton  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Tipo de Profesional
+        </button>
+        <div class="dropdown-menu dropdown-menu-left">
+            <button *ngFor="let tipo of tipoProfesionales" class="dropdown-item item-desplegable" type="button" >{{tipo.nombre}}</button>
+        </div>
+    </div>
+
+<div class="contenedor-tarjeta row ">
+    <div *ngFor="let profesional of ListaProfesionales" class="  tarjeta col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 col-12">
+        <div class="caja">
+            <img src="{{url_storage}}{{profesional.imagen}}" alt="..." class="img-t">
+            <h5 class="mt-2">{{profesional.nombre}}</h5>
+            <p>{{profesional.tipo_profesional.nombre}}</p>
+            <a href="#" class="boton">Ver Opiniones >></a>
+        </div>
+    </div>
+</div>
+
+</section>
