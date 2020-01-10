@@ -212,6 +212,27 @@ class ProfesionalController extends Controller{
       }
    }
 
+   public function getProfesionalByIdTipo($idTipo){
+      $profesionales = Profesional::where([['id_tipo', '=', $idTipo]])->get();
+
+      if(!is_null($profesionales)){
+         $profesionales->load('tipo_profesional','opiniones');
+         return response()->json(array(
+            'profesionales'=>$profesionales,
+            'status'=>'success'
+         ),200);
+
+      }else{
+         //El profesional con ese id no existe
+         
+			return response()->json(array(
+				'errores' => ['No hay profesionales con este tipo de profesion'],
+				'status' => 'error'
+			), 200);
+      }
+
+   }
+
    public function updateProfesional($id, Request $request){
       $hash = $request->header('Authorization',null);
       $jwtAuth = new JwtAuth();
