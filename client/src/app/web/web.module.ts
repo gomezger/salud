@@ -7,6 +7,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { ProfesionalesComponent } from './profesionales/profesionales.component';
+import { SumateComponent } from './sumate/sumate.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ProfesionalesComponent } from './profesionales/profesionales.component'
     InicioComponent,
     HeaderComponent,
     FooterComponent,
-    ProfesionalesComponent
+    ProfesionalesComponent,
+    SumateComponent
   ],
   imports: [
     CommonModule,

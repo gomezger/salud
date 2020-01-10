@@ -4,6 +4,7 @@ import { WebComponent } from './web.component';
 import { InicioComponent } from './inicio/inicio.component';
 
 import {ProfesionalesComponent} from './profesionales/profesionales.component'
+import { SumateComponent } from './sumate/sumate.component';
 
 const routes: Routes = [
   { 
@@ -11,7 +12,8 @@ const routes: Routes = [
     component: WebComponent,
     children: [
       {path: '', component: InicioComponent },
-      {path:'profesionales',component: ProfesionalesComponent}
+      {path:'profesionales',component: ProfesionalesComponent},
+      {path:'sumate',component: SumateComponent}
     ]  
   }
 ];
