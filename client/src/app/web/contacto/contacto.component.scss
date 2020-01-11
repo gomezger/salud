@@ -22,8 +22,26 @@
     color: #1e6cd1;
 }
 
-form{
+.datos{ 
+}
 
+.datos .titulo, .sumate .titulo{
+  font-weight: 600;
+  font-size: 23px;
+}
+
+
+.datos .dato{
+  margin-bottom: 10px !important;
+  float: left;
+  clear: both;
+  font-size: 19px;
+}
+
+form{ 
+    border-right: 2px solid #EEE;
+    padding-right: 20px !important;
+    padding-bottom: 20px !important;
 }
 
 .form-group{
@@ -34,7 +52,7 @@ form{
     color: #03162e;
 }
 
-.form-group input, .form-group select, .custom-file-label{
+.form-group input, .form-group select, .custom-file-label, .form-group textarea{
     border: solid 1px #FFF;
     background-color: rgba(232, 232, 243, 0.384);
     border-bottom: 1.5px solid #267ef1;
@@ -42,10 +60,14 @@ form{
     height: 43px;
 }
 
-.form-group input:focus, .form-group select:focus{
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus{
     border-bottom: 1.5px solid #99ba65;
     transition: 0.5s;
     //height: 41px;
+}
+
+.form-group textarea{
+  height: 120px;
 }
 
 form .boton{
