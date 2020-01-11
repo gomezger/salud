@@ -107,6 +107,14 @@ form .boton:hover{
 /* Tablet : 768px. */
 
 @media only screen and (max-width: 991px) {
+
+    
+    form{ 
+        border-right: 0px solid #EEE;
+        padding-right: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
     .sumate .portada{
         background-size: 100% auto ;
         min-height: 130px;

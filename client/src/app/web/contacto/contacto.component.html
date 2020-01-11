@@ -44,16 +44,16 @@
       </form>
 
       <div class="datos mt-2 mt-md-4 col-12 col-lg-3 col-xl-5 p-0 pl-0 pl-lg-5 float-left">
-        <div class="titulo">
+        <div class="titulo mt-4 mt-md-0">
           Datos de contacto
         </div>
         <div class="borde corto clearfix mt-1 mb-4"></div>
 
         <div class="redes float-left p-0 pt-5 ">
-          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-facebook-square mr-3"></i>cudiarsaludarg</a>
-          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-instagram mr-3"></i>cuidarsaludarg</a>
-          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-whatsapp mr-3"></i>+54 291 5278451</a>
-          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fas fa-at mr-3"></i>info@cuidarsaludarg.com</a>
+          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-facebook-square mr-3"></i>Cuidar Salud en Facebook</a>
+          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-instagram mr-3"></i>Cuidar Salud en Instagram</a>
+          <a *ngIf="informacion && informacion.telefono" href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-whatsapp mr-3"></i>+54 {{informacion.telefono}}</a>
+          <a *ngIf="informacion && informacion.email" href="#" class="dato text-dark clearfix" target="_blank"><i class="fas fa-at mr-3"></i>{{informacion.email}}</a>
         </div>
 
       </div>
