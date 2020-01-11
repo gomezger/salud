@@ -9,6 +9,7 @@ import { FooterComponent } from './componentes/footer/footer.component';
 import { ProfesionalesComponent } from './profesionales/profesionales.component';
 import { SumateComponent } from './sumate/sumate.component';
 import { ContactoComponent } from './contacto/contacto.component';
+import { NgForm, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ContactoComponent } from './contacto/contacto.component';
   ],
   imports: [
     CommonModule,
-    WebRoutingModule
+    WebRoutingModule,
+    FormsModule
   ]
 })
 export class WebModule { }

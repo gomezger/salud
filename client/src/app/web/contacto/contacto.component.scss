@@ -22,18 +22,27 @@
     color: #1e6cd1;
 }
 
-.datos{ }
+.datos{ 
+}
 
 .datos .titulo, .sumate .titulo{
   font-weight: 600;
+  font-size: 23px;
 }
+
+
 .datos .dato{
   margin-bottom: 10px !important;
   float: left;
   clear: both;
+  font-size: 19px;
 }
 
-form{ }
+form{ 
+    border-right: 2px solid #EEE;
+    padding-right: 20px !important;
+    padding-bottom: 20px !important;
+}
 
 .form-group{
     margin-top: 20px;
