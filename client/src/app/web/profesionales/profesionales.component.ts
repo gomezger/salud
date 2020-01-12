@@ -68,7 +68,7 @@ export class ProfesionalesComponent implements OnInit {
             //guardamos resultado en cache
             localStorage.setItem('profesionales',JSON.stringify(this.ListaProfesionales));
           } else {
-            this.errores = response.errores;  
+            this.errores = response.errores; 
           }
       },
       error => {
@@ -76,5 +76,4 @@ export class ProfesionalesComponent implements OnInit {
       }
     );
   }
-
 }

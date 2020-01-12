@@ -17,6 +17,7 @@
             Tipo de Profesional
         </button>
         <div class="dropdown-menu dropdown-menu-left">
+            <button class="dropdown-item item-desplegable" type="button" >Todos</button>
             <button *ngFor="let tipo of tipoProfesionales" class="dropdown-item item-desplegable" type="button" >{{tipo.nombre}}</button>
         </div>
     </div>
