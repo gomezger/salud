@@ -21,9 +21,10 @@ Route::group(['middleware' => ['cors']], function () {
 
     // informacion
     Route::get('/informacion/', 'InformacionController@getInformacion');
-
+    
     //avisos
     Route::post('/avisos/correoweb/', 'AvisosController@correoWeb');
+    Route::post('/avisos/sumate/', 'AvisosController@sumate');
     
     //profesionales
     Route::post('/profesionales/insert/','ProfesionalController@insertProfesional');

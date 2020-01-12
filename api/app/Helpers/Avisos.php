@@ -46,6 +46,30 @@ class Avisos{
         $this->agregarCorreo($this->correo_oficial,'Consulta enviada desde la web',$consulta,$email,$nombre);        
     }
 
+    /**
+     * Eniva uan consulta hecha desde el form de la web
+     */
+    public function sumate($nombre, $apellido, $email, $telefono, $imagen, $cv){
+
+        //agrego nombre y email
+        $consulta = '
+            > Nombre: '.$nombre.'<br>
+            > Apellido: '.$apellido.'<br>
+            > Correo: '.$email.'<br>
+        ';
+
+        //agrego telefono si lo puso
+        if(!is_null($telefono)){
+            $consulta.='
+                > Teléfono: '.$telefono.'<br>
+            ';
+        }
+
+        $adjunto = json_encode([$imagen,$cv]);
+
+        $this->agregarCorreo($this->correo_oficial,'Solicitud de ingreso',$consulta,$email,$nombre,$adjunto);        
+    }
+
 
     /**
      * Envia los avisos actuales
@@ -118,8 +142,12 @@ class Avisos{
         $mail->CharSet = 'UTF-8';
     
         //agreagr archivo
-        if(!is_null($archivo))
-            $mail->addAttachment('../adjuntos/'.$archivo,$archivo);
+        if(!is_null($archivo)){
+            $adjuntos = json_decode($archivo);
+            foreach($adjuntos as $adjunto){
+                $mail->addAttachment(asset('/'. $adjunto),asset('/'. $adjunto));
+            }
+        }
         
         //enviar correo
         if(!$mail->send()){
