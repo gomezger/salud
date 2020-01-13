@@ -16,12 +16,15 @@ export class ProfesionalesComponent implements OnInit {
   public ListaProfesionales: Array<Profesional>;
   public url_storage:String;
   public errores:Array<String>;
+  public hayProfesionales:boolean;
 
   constructor(
     private _profesionalService:ProfesionalService,
     private _tipoProfesionalService:TipoProfesionalService
   ) { 
     this.url_storage=GLOBAL.url_storage;
+    this.hayProfesionales=true;
+
   }
 
   ngOnInit() {
@@ -62,6 +65,12 @@ export class ProfesionalesComponent implements OnInit {
     this._profesionalService.getProfesionales().subscribe(
       response => {
           if (response.status === 'success') {
+            if(this.ListaProfesionales.length===0){
+              console.log("No hay profesionales");
+              this.hayProfesionales=false;
+            }else{
+              this.hayProfesionales=true;
+            }
             //guardamos resultado
             this.ListaProfesionales = response.profesionales;
             this.ListaProfesionales=this.ListaProfesionales.sort(function(){return Math.random()-0.5});
@@ -75,5 +84,23 @@ export class ProfesionalesComponent implements OnInit {
         this.errores = [error.message,"Error al cargar los profesionales, recargue la pantalla y verifique su conexión a internet"];
       }
     );
+  }
+
+  filtrar(id:number){
+    this._profesionalService.getProfesionalesByTipo(id).subscribe(
+      response=>{
+        if (response.status === 'success') {
+          this.ListaProfesionales = response.profesionales;
+          if(this.ListaProfesionales.length===0){
+            console.log("No hay profesionales");
+            this.hayProfesionales=false;
+          }
+        }else {
+          this.errores = response.errores;
+        } 
+    },
+    error=>{
+      this.errores = [error.message,"Error al cargar los profesionales, recargue la pantalla y verifique su conexión a internet"];
+    });
   }
 }

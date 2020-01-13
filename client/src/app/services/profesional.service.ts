@@ -70,4 +70,9 @@ export class ProfesionalService {
     return this._http.get(this.url + 'profesional/'+id, { 'headers' : headers });
   }
 
+  public getProfesionalesByTipo(id:number):Observable<any>{
+    const headers = new HttpHeaders();
+    return this._http.get(this.url+'/profesional/tipo/'+id,{'headers':headers});
+  }
+
 }
