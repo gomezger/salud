@@ -4,6 +4,7 @@ import { GLOBAL } from './global';
 import { Aviso } from '../models/aviso';
 import { Observable } from 'rxjs';
 import { Contacto } from '../models/contacto';
+import { Sumate } from '../models/sumate';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,20 @@ export class AvisosService {
     const headers = new HttpHeaders();
 
     return this._http.post(this.url + 'avisos/correoweb/', params, { 'headers' : headers });
+  }
+  
+  public sumate(sumate: Sumate): Observable<any>{    
+        
+    //creo formulario para recibir datos en backend
+    let params = new FormData();
+    params.append('json',JSON.stringify(sumate));
+    params.append('imagen',sumate.imagen);
+    params.append('cv',sumate.cv);
+
+    //creo headers
+    const headers = new HttpHeaders();
+
+    return this._http.post(this.url + 'avisos/sumate/', params, { 'headers' : headers });
   }
 
 
