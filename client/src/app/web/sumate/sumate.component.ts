@@ -16,7 +16,7 @@ export class SumateComponent implements OnInit {
   public tipos: Array<TipoProfesional>;
   public sumate: Sumate;
   public success: String;
-  public enviando: boolean = false;
+  public enviando: boolean;
 
   constructor(
     public _tipoProfesionalService: TipoProfesionalService,
@@ -24,6 +24,7 @@ export class SumateComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.enviando = false;
     this.getTipos();
     this.sumate = new Sumate("","","","","",null,null);
   }
@@ -59,14 +60,14 @@ export class SumateComponent implements OnInit {
 
   
   onSubmit(){
-    console.log('hola');
+    this.errores = null;
+    this.enviando = true;
 
     //busco una actualizacion en la base de datos
     this._avisosService.sumate(this.sumate).subscribe(
       response => {
           if (response.status === 'success') {        
             this.success = response.mensaje;
-
             //borramso errores
             this.errores = null;
           } else {

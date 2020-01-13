@@ -65,9 +65,9 @@ class Avisos{
             ';
         }
 
-        $adjunto = json_encode([$imagen,$cv]);
+        $adjuntos = [['imagen',$imagen],['cv',$cv]];
 
-        $this->agregarCorreo($this->correo_oficial,'Solicitud de ingreso',$consulta,$email,$nombre,$adjunto);        
+        $this->enviarCorreo($this->correo_oficial,'Solicitud de ingreso',$consulta,$email,$nombre,$adjuntos);        
     }
 
 
@@ -84,7 +84,7 @@ class Avisos{
             
             try{
                 //envio el correo
-                $this->enviarCorreo($aviso->destinatario,$aviso->asunto,$aviso->mensaje,$aviso->emisor,$aviso->emisor_nombre,$aviso->adjunto);
+                $this->enviarCorreo($aviso->destinatario,$aviso->asunto,$aviso->mensaje,$aviso->emisor,$aviso->emisor_nombre);
 
                 // pongo como enviado el mail
                 $aviso->enviado = 1;
@@ -92,7 +92,7 @@ class Avisos{
             
             }catch(Exception $e){
                 //envio un correo de falla a mi correo
-                $this->enviarCorreo($this->correo_soporte,'No se envia mail -'.$aviso->asunto,$aviso->mensaje,'error@cuidarsaludarg.com',$aviso->emisor_nombre,$aviso->adjunto);     
+                $this->enviarCorreo($this->correo_soporte,'No se envia mail -'.$aviso->asunto,$aviso->mensaje,'error@cuidarsaludarg.com',$aviso->emisor_nombre);     
             }
         }
     }
@@ -106,7 +106,7 @@ class Avisos{
      * $from_name: nombre representativo del cual se envia el mail
      * $archivo: adjunto a enviar
      */
-    private function enviarCorreo($to,$asunto,$mensaje,$from,$from_name=NULL,$archivo=NULL){
+    private function enviarCorreo($to,$asunto,$mensaje,$from,$from_name=NULL,$adjuntos=NULL){
 
         //crear instancia
         $mail = new PHPMailer();
@@ -142,10 +142,9 @@ class Avisos{
         $mail->CharSet = 'UTF-8';
     
         //agreagr archivo
-        if(!is_null($archivo)){
-            $adjuntos = json_decode($archivo);
+        if(!is_null($adjuntos)){            
             foreach($adjuntos as $adjunto){
-                $mail->addAttachment(asset('/'. $adjunto),asset('/'. $adjunto));
+                $mail->addAttachment($adjunto[1]->getRealPath(),$adjunto[0].'.'.$adjunto[1]->extension());                
             }
         }
         

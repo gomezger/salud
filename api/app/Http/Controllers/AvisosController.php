@@ -176,7 +176,7 @@ class AvisosController extends Controller
             }             
             
             $avisos = new Avisos();
-            $avisos->sumate($nombre, $apellido, $email, $telefono, $imagen_new_path, $cv_new_path);
+            $avisos->sumate($nombre, $apellido, $email, $telefono, $imagen, $cv);
             $avisos->enviarAvisos();
 
             $data = array(
