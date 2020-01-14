@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-inicio',
@@ -10,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _titleService: Title
+    ) { }
 
   ngOnInit() {
+    this._titleService.setTitle('Cuidar Salud - Bahía Blanca');
   }
 
 }

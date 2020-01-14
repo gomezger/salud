@@ -4,6 +4,7 @@ import { TipoProfesional } from 'src/app/models/tipo-profesional';
 import { Sumate } from 'src/app/models/sumate';
 import { AvisosService } from 'src/app/services/avisos.service';
 import * as $ from 'jquery';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sumate',
@@ -20,13 +21,15 @@ export class SumateComponent implements OnInit {
 
   constructor(
     public _tipoProfesionalService: TipoProfesionalService,
-    public _avisosService: AvisosService
+    public _avisosService: AvisosService,
+    private _titleService: Title
   ) { }
 
   ngOnInit() {
     this.enviando = false;
     this.getTipos();
     this.sumate = new Sumate("","","","","",null,null);
+    this._titleService.setTitle('Sumate | Cuidar Salud - Bahía Blanca');
   }
 
   

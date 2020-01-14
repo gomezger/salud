@@ -4,6 +4,7 @@ import {TipoProfesionalService}from 'src/app/services/tipo-profesional.service';
 import {TipoProfesional}from 'src/app/models/tipo-profesional';
 import {Profesional} from 'src/app/models/profesional';
 import { GLOBAL } from 'src/app/services/global';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class ProfesionalesComponent implements OnInit {
 
   constructor(
     private _profesionalService:ProfesionalService,
-    private _tipoProfesionalService:TipoProfesionalService
+    private _tipoProfesionalService:TipoProfesionalService,
+    private _titleService: Title
   ) { 
     this.url_storage=GLOBAL.url_storage;
     this.hayProfesionales=true;
@@ -30,6 +32,7 @@ export class ProfesionalesComponent implements OnInit {
   ngOnInit() {
     this.getTiposProfesionales();
     this.getProfesionales();
+    this._titleService.setTitle('Profesionales | Cuidar Salud - Bahía Blanca');
   }
 
   getTiposProfesionales(){

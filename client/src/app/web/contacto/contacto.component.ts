@@ -3,6 +3,7 @@ import { AvisosService } from 'src/app/services/avisos.service';
 import { Contacto } from 'src/app/models/contacto';
 import { Informacion } from 'src/app/models/informacion';
 import { InformacionService } from 'src/app/services/informacion.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contacto',
@@ -19,12 +20,14 @@ export class ContactoComponent implements OnInit {
 
   constructor(
     public _avisosService: AvisosService,
-    public _informacionService: InformacionService
+    public _informacionService: InformacionService,
+    private _titleService: Title
   ) { }
 
   ngOnInit() {
     this.contacto = new Contacto("","","","");
     this.getInformacion();
+    this._titleService.setTitle('Contacto | Cuidar Salud - Bahía Blanca');
   }
 
   onSubmitContacto(){
