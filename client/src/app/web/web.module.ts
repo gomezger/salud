@@ -10,6 +10,7 @@ import { ProfesionalesComponent } from './profesionales/profesionales.component'
 import { SumateComponent } from './sumate/sumate.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { NgForm, FormsModule } from '@angular/forms';
+import { OpinionesComponent } from './opiniones/opiniones.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NgForm, FormsModule } from '@angular/forms';
     FooterComponent,
     ProfesionalesComponent,
     SumateComponent,
-    ContactoComponent
+    ContactoComponent,
+    OpinionesComponent
   ],
   imports: [
     CommonModule,

@@ -4,9 +4,11 @@
     }
     .contenedor-tarjeta{    
         width: 100%;
+        margin: auto;
     }
 
     .caja{
+        width:300px;
         align-items: center;
         -webkit-box-shadow: 0 3px 3px 3px rgba(0,0,0,.1);
         background-color: #1e7e710e;
@@ -16,6 +18,7 @@
         border-color: rgba(0, 0, 0, 0.2);
         border-radius: 10px;
         transition-duration: 1s;
+        margin:auto;
         margin-bottom:28px;
         padding:25px;
     }
@@ -70,4 +73,10 @@
     .alert-no-profesionales{
         width: 100%;
         height: 50vh;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .caja{
+            width: 100%;
+        }
     }
