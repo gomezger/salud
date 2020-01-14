@@ -55,13 +55,22 @@ export class ContactoComponent implements OnInit {
     );
   }
 
-  
+  /**
+   * Obtiene info del backend
+   */
   getInformacion(){
+
+    //busco en localSotrage
+    const cont = localStorage.getItem('informacion');
+    if(cont!==null)
+      this.informacion = JSON.parse(cont);
+
     //busco una actualizacion en la base de datos
     this._informacionService.informacion().subscribe(
       response => {
           if (response.status === 'success') {            
             this.informacion = response.informacion;
+            localStorage.setItem('informacion',JSON.stringify(this.informacion));
           }
       },
       error => {}

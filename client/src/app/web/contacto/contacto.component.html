@@ -50,10 +50,37 @@
         <div class="borde corto clearfix mt-1 mb-4"></div>
 
         <div class="redes float-left p-0 pt-5 ">
-          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-facebook-square mr-3"></i>Cuidar Salud en Facebook</a>
-          <a href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-instagram mr-3"></i>Cuidar Salud en Instagram</a>
-          <a *ngIf="informacion && informacion.telefono" href="#" class="dato text-dark clearfix" target="_blank"><i class="fab fa-whatsapp mr-3"></i>+54 {{informacion.telefono}}</a>
-          <a *ngIf="informacion && informacion.email" href="#" class="dato text-dark clearfix" target="_blank"><i class="fas fa-at mr-3"></i>{{informacion.email}}</a>
+            <a 
+                *ngIf="informacion && informacion.facebook_name && informacion.facebook_url" 
+                href="{{informacion.facebook_url}}" class="dato text-dark clearfix" 
+                target="_blank">
+                    <i class="fab fa-facebook-square mr-3"></i>{{informacion.instagram_name}}
+            </a>
+            <a 
+                *ngIf="informacion && informacion.instagram_name && informacion.instagram_url" 
+                href="{{informacion.instagram_url}}" class="dato text-dark clearfix" 
+                target="_blank">
+                    <i class="fab fa-instagram mr-3"></i>{{informacion.instagram_name}}
+            </a>
+            <a 
+                *ngIf="informacion && informacion.telefono" 
+                href="https://api.whatsapp.com/send?phone=549{{informacion.telefono}}" class="dato text-dark clearfix" 
+                target="_blank">
+                    <i class="fab fa-whatsapp mr-3"></i>
+                    +54 {{informacion.telefono}}
+            </a>
+            <a 
+                *ngIf="informacion && informacion.telefono2" 
+                class="dato text-dark clearfix" 
+                target="_blank">
+                    <i class="fas fa-phone mr-3"></i>
+                    {{informacion.telefono2}}
+            </a>
+            <a 
+                *ngIf="informacion && informacion.email" 
+                class="dato text-dark clearfix" target="_blank">
+                    <i class="fas fa-at mr-3"></i>{{informacion.email}}
+            </a>
         </div>
 
       </div>

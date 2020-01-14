@@ -4,13 +4,13 @@
 
         <div class="derecha float-right">
             <h3 class="info float-left mr-4 d-none d-md-inline-block"><i class="fas fa-map-marker-alt mr-1"></i> Bahía Blanca</h3>
-            <div class="info telefono float-left mr-4 d-none d-md-inline-block"><i class="fas fa-phone mr-1"></i> 0291 154740270</div>
+            <div *ngIf="informacion && informacion.telefono2" class="info telefono float-left mr-4 d-none d-md-inline-block"><i class="fas fa-phone mr-1"></i> {{informacion.telefono2}}</div>
 
 
             <div class="redes float-left mr-1 mr-md-0">
-                <a href="#" class="text-light mr-2 mr-md-2" target="_blank"><i class="fab fa-facebook-square"></i></a>
-                <a href="#" class="text-light mr-2 mr-md-2" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-light" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a *ngIf="informacion && informacion.facebook_url && informacion.facebook_name" href="{{informacion.facebook_url}}" class="text-light mr-2 mr-md-2" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                <a *ngIf="informacion && informacion.instagram_url && informacion.instagram_name" href="{{informacion.instagram_url}}" class="text-light mr-2 mr-md-2" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a *ngIf="informacion && informacion.telefono" href="https://api.whatsapp.com/send?phone=549{{informacion.telefono}}" class="text-light" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </div>

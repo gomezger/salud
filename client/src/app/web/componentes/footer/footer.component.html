@@ -22,9 +22,6 @@
         <!-- Grid column -->
         <div class="col-md-3 mb-md-0 mb-3 d-none d-md-inline-block">
   
-          <!-- Links -->
-          <h5 class="text-uppercase d-none">Links</h5>
-  
           <ul class="list-unstyled">
             <li>
               <a [routerLink]="['/']">Inicio</a>
@@ -51,9 +48,9 @@
   
           <ul class="list-unstyled">
             <li class="mt-3">
-              <a href="#" class="text-light mr-3 mr-md-4" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
-              <a href="#" class="text-light mr-3 mr-md-4" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
-              <a href="#" class="text-light" target="_blank"><i class="fab fa-whatsapp fa-2x"></i></a>
+              <a *ngIf="informacion && informacion.facebook_url && informacion.facebook_name" href="{{informacion.facebook_url}}"  class="text-light mr-3 mr-md-4" target="_blank"><i class="fab fa-facebook-square fa-2x"></i></a>
+              <a *ngIf="informacion && informacion.instagram_url && informacion.instagram_name" href="{{informacion.instagram_url}}" class="text-light mr-3 mr-md-4" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
+              <a *ngIf="informacion && informacion.telefono" href="https://api.whatsapp.com/send?phone=549{{informacion.telefono}}" class="text-light" target="_blank"><i class="fab fa-whatsapp fa-2x"></i></a>
             </li>
           </ul>
   
