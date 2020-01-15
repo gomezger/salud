@@ -69,7 +69,6 @@ export class ProfesionalesComponent implements OnInit {
       response => {
           if (response.status === 'success') {
             if(this.ListaProfesionales.length===0){
-              console.log("No hay profesionales");
               this.hayProfesionales=false;
             }else{
               this.hayProfesionales=true;
@@ -95,8 +94,9 @@ export class ProfesionalesComponent implements OnInit {
         if (response.status === 'success') {
           this.ListaProfesionales = response.profesionales;
           if(this.ListaProfesionales.length===0){
-            console.log("No hay profesionales");
             this.hayProfesionales=false;
+          }else{
+            this.hayProfesionales=true;
           }
         }else {
           this.errores = response.errores;
