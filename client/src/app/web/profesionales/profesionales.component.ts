@@ -5,7 +5,7 @@ import {TipoProfesional}from 'src/app/models/tipo-profesional';
 import {Profesional} from 'src/app/models/profesional';
 import { GLOBAL } from 'src/app/services/global';
 import { Title } from '@angular/platform-browser';
-
+import {Router,ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'app-profesionales',
@@ -22,7 +22,9 @@ export class ProfesionalesComponent implements OnInit {
   constructor(
     private _profesionalService:ProfesionalService,
     private _tipoProfesionalService:TipoProfesionalService,
-    private _titleService: Title
+    private _titleService: Title,
+    private _router : Router, 
+    private _route:ActivatedRoute
   ) { 
     this.url_storage=GLOBAL.url_storage;
     this.hayProfesionales=true;
@@ -105,5 +107,9 @@ export class ProfesionalesComponent implements OnInit {
     error=>{
       this.errores = [error.message,"Error al cargar los profesionales, recargue la pantalla y verifique su conexión a internet"];
     });
+  }
+
+  goOpioniones(idProfesional:number){
+    this._router.navigate(['opiniones/:id',{id:idProfesional}]);
   }
 }

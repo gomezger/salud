@@ -6,6 +6,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import {ProfesionalesComponent} from './profesionales/profesionales.component'
 import {ContactoComponent} from './contacto/contacto.component'
 import { SumateComponent } from './sumate/sumate.component';
+import {OpinionesComponent}from './opiniones/opiniones.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       {path: '', component: InicioComponent },
       {path:'profesionales', component: ProfesionalesComponent},
       {path:'sumate', component: SumateComponent},
-      {path:'contacto', component: ContactoComponent}
+      {path:'contacto', component: ContactoComponent},
+      {path:'opiniones/:id',component:OpinionesComponent}
     ]
   }
 ];

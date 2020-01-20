@@ -11,7 +11,7 @@
 </div>
 
 <section *ngIf="(tipoProfesionales!=null && ListaProfesionales!=null)"  class="container">
-
+    <!-- Filtro -->
     <div class="btn-group pt-3">
         <button type="button" class=" boton  dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Tipo de Profesional
@@ -21,25 +21,29 @@
             <button *ngFor="let tipo of tipoProfesionales" class="dropdown-item item-desplegable" type="button" (click)="filtrar(tipo.id)">{{tipo.nombre}}</button>
         </div>
     </div>
+    <!--Alerta sin usuarios-->
+    <div *ngIf="!hayProfesionales" class="alert-no-profesionales">
+        <div class="alert-no-profesionales">
+            <div class="alert alert-secondary mt-4" role="alert">
 
-<div *ngIf="!hayProfesionales" class="alert-no-profesionales">
-    <div class="alert-no-profesionales">
-        <div class="alert alert-secondary mt-4" role="alert">
-
-            Lo sentimos, no hay profesionales.
+                Lo sentimos, no hay profesionales.
+            </div>
         </div>
     </div>
-</div>
-
-<div class="contenedor-tarjeta row " *ngIf="hayProfesionales">
-    <div *ngFor="let profesional of ListaProfesionales" class="  tarjeta col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-12">
-        <div class="caja">
-            <img src="{{url_storage}}{{profesional.imagen}}" alt="..." class="img-t">
-            <h5 class="m-2">{{profesional.nombre}}</h5>
-            <p>{{profesional.tipo_profesional.nombre}}</p>
-            <a href="#" class="boton">Ver Opiniones >></a>
+    <!-- Tarjetas -->
+    <div class="contenedor-tarjeta row " *ngIf="hayProfesionales">
+        <div *ngFor="let profesional of ListaProfesionales" class="  tarjeta col-xs-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 col-12">
+            <div class="caja">
+                <img src="{{url_storage}}{{profesional.imagen}}" alt="..." class="img-t">
+                <h5 class="m-2">{{profesional.nombre}}</h5>
+                <p>{{profesional.tipo_profesional.nombre}}</p>
+                <a href="#" class="boton col-6">Contactar</a>
+                <div class="opiniones" (click)="goOpiniones(profesional.id)">
+                    <p style="margin-bottom: -5px;">Ver Opiniones</p>
+                    <i class="fas fa-sort-down" style=" font-size: 30px; "></i>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
 </section>
