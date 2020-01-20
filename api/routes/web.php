@@ -46,5 +46,5 @@ Route::group(['middleware' => ['cors']], function () {
     Route::post('/opiniones/editar/{id}','OpinionCotroller@updateOpinion');
     Route::post('/opiniones/insert/','OpinionCotroller@insertOpinion');
     Route::delete('/opiniones/delete/{id}','OpinionCotroller@deleteOpinion');
-
+    Route::get('/opiniones/profesional/{profesional_id}','OpinionCotroller@getOpinionByProfesional');
 });
