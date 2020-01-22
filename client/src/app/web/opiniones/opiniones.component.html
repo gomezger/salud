@@ -3,35 +3,20 @@
 <div class="row">
     <div class="col-lg-3 col-xl-3 d-none d-sm-none d-lg-block">
         <!-- Tarjeta de Profesional -->
-            <div class="caja">
-                <img src="../../../assets/profesional1.jpeg" alt="" class="img-t">
-                <p>Cuidador</p>
-                <h5>Afrolindo Mircovich</h5>
+            <div class="caja" *ngIf="myProfesional!=null">
+                <img src="{{url_storage}}{{myProfesional.imagen}}" alt="" class="img-t">
+                <p>{{myProfesional.tipo_profesional.nombre}}</p>
+                <h5>{{myProfesional.nombre}}</h5>
             </div>
     </div>
 
     <div class=" col-xl-9 col-lg-9 col-12">
         <div class="scroll-clase">
-            <div class="caja-comentario">
+            <div class="caja-comentario" *ngFor="let op of opinionesProfesional">
                 <div class="comentario">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, exercitationem iste voluptates repellat explicabo, voluptatibus amet velit dolores, omnis vitae eos hic unde? Quod, saepe!</p>
-                    <p style="text-align: end;  font-style: italic;">— Maria Margarita</p>
-                </div>
-                <div class="comentario">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, ratione.</p>
-                    <p style="text-align: end;  font-style: italic;">— Maria Margarita</p>
-                </div>
-                <div class="comentario">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed, eveniet? Quod, error necessitatibus magni laborum similique impedit ex sapiente hic soluta incidunt nihil quibusdam nam facere saepe dignissimos, exercitationem ipsum!</p>
-                    <p style="text-align: end;  font-style: italic;">— Maria Margarita</p>
-                </div>
-                <div class="comentario">
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni, exercitationem iste voluptates repellat explicabo, voluptatibus amet velit dolores, omnis vitae eos hic unde? Quod, saepe!</p>
-                    <p style="text-align: end;  font-style: italic;">— Maria Margarita</p>
-                </div>
-                <div class="comentario">
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores fugiat quos nam saepe praesentium explicabo soluta est sapiente, sequi excepturi ab, minima animi harum esse ullam optio sunt ea incidunt eligendi aliquid quod nobis neque aspernatur? Dolore dolores accusamus quam voluptatem nesciunt provident eius magnam. Eveniet architecto soluta omnis totam aperiam voluptates recusandae nostrum enim tenetur delectus quam incidunt, unde, saepe ullam optio illo vero quod accusamus deserunt consequuntur at reiciendis vitae laboriosam. Facere vitae, eius minima exercitationem ab unde nobis magni ut consequatur error alias suscipit quos similique deserunt deleniti quam sequi! Vel eum voluptatem veniam ducimus nesciunt perferendis.</p>
-                    <p style="text-align: end;  font-style: italic;">— Maria Margarita</p>
+                    <p style="text-align: end;">{{op.created_at}}</p>
+                    <p>{{op.descripcion}}</p>
+                    <p style="text-align: end;  font-style: italic;">— {{op.nombre}}</p>
                 </div>
             </div>
         </div>
@@ -39,8 +24,43 @@
             <!-- Enviar comentarios -->
             <div class="col-12">
                 <div class="enviar">
-                    <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3" placeholder="Ingrese aqui su comentario..." ></textarea>
-                    <button class="boton"><i class="fas fa-paper-plane"></i></button>
+                    <textarea class="form-control textarea" id="texto" rows="3" placeholder="Ingrese aqui su comentario..." ></textarea>
+                    <button class="boton" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-paper-plane"></i></button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Primero necesitamos tus datos</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <label for="inputNombre">Nombre y Apellido</label>
+                                        <input type="nombre" class="form-control" id="inputNombre">  
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                      <label for="inputEmail">Email</label>
+                                      <input type="email" class="form-control" id="inputEmail">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                      <label for="inputTelefono">Telefono</label>
+                                      <input type="telefono" class="form-control" id="inputTelefono">
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" (click)="enviar()">Enviar</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

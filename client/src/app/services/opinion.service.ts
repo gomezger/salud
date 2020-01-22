@@ -4,6 +4,7 @@ import { GLOBAL } from './global';
 import { Observable } from 'rxjs';
 import { Opinion } from '../models/opinion';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -41,6 +42,11 @@ export class OpinionService {
     const headers = new HttpHeaders().set('Authorization', token);
 
     return this._http.delete(this.url + 'opiniones/delete/'+opinion.id, { 'headers' : headers });
+  }
+
+  public getOpinionesByProfesional(id:number):Observable<any>{
+    const headers= new HttpHeaders();
+    return this._http.get(this.url+'opiniones/profesional/'+id,{'headers':headers});
   }
 
 }
