@@ -23,11 +23,11 @@ class OpinionCotroller extends Controller
      }
 
     public function insertOpinion(Request $request){
-        $hash = $request->header('Authorization',null);
-        $jwtAuth = new JwtAuth();
-        $checkToken = $jwtAuth->checkToken($hash);
+        //$hash = $request->header('Authorization',null);
+        //$jwtAuth = new JwtAuth();
+        //$checkToken = $jwtAuth->checkToken($hash);
         
-        if($checkToken){
+        
             //Recoger POST
             $json = $request->input('json',null);
             $params = json_decode($json);
@@ -101,14 +101,6 @@ class OpinionCotroller extends Controller
                  return response()->json($data,200); 
             }
 
-        }else{
-            $data = array(
-                'status' => 'error',
-                'code' => 400,
-                'messages' => 'Fallo autentificacion',
-             );
-             return response()->json($data,200);         
-        }
     }
 
     public function getOpinionByProfesional($profesional_id){

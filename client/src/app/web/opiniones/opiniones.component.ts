@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import {Profesional} from 'src/app/models/profesional';
 import{Opinion} from 'src/app/models/opinion';
 import {Route,Params,ActivatedRoute,Router} from '@angular/router';
 import{OpinionService}from '../../services/opinion.service';
 import{ProfesionalService}from '../../services/profesional.service';
 import { GLOBAL } from 'src/app/services/global';
+
 
 @Component({
   selector: 'app-opiniones',
@@ -17,6 +18,8 @@ export class OpinionesComponent implements OnInit {
   public url_storage:String;
   public errores:Array<String>;
   
+  @ViewChild('mimodal',{static: false}) modal:ElementRef;
+
   constructor(
     private profesionalService:ProfesionalService,
     private opinionService:OpinionService,
@@ -40,7 +43,7 @@ export class OpinionesComponent implements OnInit {
       response=>{
         if(response.status==='success'){
           this.myProfesional= response.profesional;
-          console.log(this.myProfesional);
+          //console.log(this.myProfesional);
           this.getOpiniones(this.myProfesional.id);
         }else{
           this.errores = response.errores;
@@ -56,7 +59,7 @@ export class OpinionesComponent implements OnInit {
       response=>{
         if(response.status==='success'){
           this.opinionesProfesional=response.opinion;
-          console.log(this.opinionesProfesional);
+          //console.log(this.opinionesProfesional);
         }else{
           this.errores = response.errores;
         }
@@ -76,8 +79,21 @@ export class OpinionesComponent implements OnInit {
     const email = element.value;
     element = <HTMLInputElement> document.getElementById('inputTelefono');
     const telefono = element.value;
-    console.log({descripcion,nombre,email,telefono});
-    //this.opinionService.update
+    //console.log({descripcion,nombre,email,telefono});
+    
+    let op = new Opinion(this.myProfesional.id,this.myProfesional,null,nombre,email,telefono,descripcion,true,null,null);
+    this.opinionService.insert(op).subscribe(
+      response=>
+      {
+        this.getOpiniones(this.myProfesional.id);
+        element  = <HTMLInputElement> document.getElementById('texto');
+        element.value="";
+        /* const modal = document.getElementById('exampleModalLong');
+        modal. */
+        this.modal.nativeElement.click();
+      });
+    
+    
   }
 
 }

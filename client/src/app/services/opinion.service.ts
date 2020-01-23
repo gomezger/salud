@@ -22,6 +22,13 @@ export class OpinionService {
     return this._http.get(this.url + 'opiniones',{ 'headers' : headers });
   }
 
+  public insert(opinion:Opinion):Observable<any>{
+    let params= new FormData();
+    params.append('json',JSON.stringify(opinion));
+    const headers = new HttpHeaders();
+
+    return this._http.post(this.url+'opiniones/insert/',params,{'headers':headers});
+  }
 
   public update(opinion: Opinion, token: string): Observable<any>{    
         
