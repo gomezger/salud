@@ -16,8 +16,7 @@
 }
 
 .caja{
-    width:270px;
-    //height: 100vh;
+    width:230px;
     align-items: center;
     -webkit-box-shadow: 0 3px 3px 3px rgba(0, 0, 0, 0.027);
     background-color: #1e7e710e;
@@ -59,7 +58,7 @@ img{
     font-size: 15px;
 }
 
-.comentario span.fecha{
+.comentario .fecha{
     font-size: 12.5px;
     color: rgb(173, 173, 173);
 }

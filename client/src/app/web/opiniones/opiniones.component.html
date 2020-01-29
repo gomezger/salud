@@ -1,7 +1,7 @@
 <section class="container">
 
 <div class="row">
-    <div class="col-lg-3 col-xl-3 d-none d-sm-none d-lg-block">
+    <div class="col-lg-3 col-xl-3 d-none d-xl-block">
         <!-- Tarjeta de Profesional -->
             <div class="caja" *ngIf="myProfesional!=null">
                 <img src="{{url_storage}}{{myProfesional.imagen}}" alt="" class="img-t">
@@ -10,13 +10,14 @@
             </div>
     </div>
 
-    <div class="col-xl-9 col-lg-9 col-12 p-0">
+    <div class="col-xl-9 col-12 col-12 p-0">
         <div class="scroll-clase">
             <div class="caja-comentario" *ngFor="let op of opinionesProfesional">
-                <div class="comentario">                    
+                <div class="comentario">             
+                    <p class="fecha pl-2" style="text-align: end;">{{getAntiguedad(op.created_at)}}</p>       
                     <p>
                         <span>{{op.descripcion}}</span>
-                        <span class="fecha pl-2">{{getAntiguedad(op.created_at)}}</span>
+                        <span class="fecha pl-2 d-none">{{getAntiguedad(op.created_at)}}</span>
                     </p>
                     <p style="text-align: end;  font-style: italic;">— {{op.nombre}}</p>
                 </div>
