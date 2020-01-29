@@ -5,24 +5,26 @@
         <!-- Tarjeta de Profesional -->
             <div class="caja" *ngIf="myProfesional!=null">
                 <img src="{{url_storage}}{{myProfesional.imagen}}" alt="" class="img-t">
+                <h5 class="mt-2">{{myProfesional.nombre}}</h5>
                 <p>{{myProfesional.tipo_profesional.nombre}}</p>
-                <h5>{{myProfesional.nombre}}</h5>
             </div>
     </div>
 
-    <div class=" col-xl-9 col-lg-9 col-12">
+    <div class="col-xl-9 col-lg-9 col-12 p-0">
         <div class="scroll-clase">
             <div class="caja-comentario" *ngFor="let op of opinionesProfesional">
-                <div class="comentario">
-                    <p style="text-align: end;">{{op.created_at}}</p>
-                    <p>{{op.descripcion}}</p>
+                <div class="comentario">                    
+                    <p>
+                        <span>{{op.descripcion}}</span>
+                        <span class="fecha pl-2">{{getAntiguedad(op.created_at)}}</span>
+                    </p>
                     <p style="text-align: end;  font-style: italic;">— {{op.nombre}}</p>
                 </div>
             </div>
         </div>
         <div class="row">
             <!-- Enviar comentarios -->
-            <div class="col-12">
+            <div class="col-12 p-0">
                 <div class="enviar">
                     <textarea class="form-control textarea" id="texto" rows="3" placeholder="Ingrese aqui su comentario..." ></textarea>
                     <button class="boton" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-paper-plane"></i></button>

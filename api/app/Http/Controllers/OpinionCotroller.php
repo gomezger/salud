@@ -21,6 +21,16 @@ class OpinionCotroller extends Controller
            'status'=>'success'
         ),200);
      }
+     
+     public function getOpinionesAprobadas(){
+        
+        $opiniones= Opinion::where('aprobado','>',0)->orderBy('id','desc')->get()->load('profesional');       
+        
+        return response()->json(array(
+           'opiniones' => $opiniones,
+           'status'=>'success'
+        ),200);
+     }
 
     public function insertOpinion(Request $request){
         //$hash = $request->header('Authorization',null);
@@ -80,6 +90,7 @@ class OpinionCotroller extends Controller
                  $opinion->telefono=$telefono;
                  $opinion->descripcion=$descripcion;
                  $opinion->id_profesional=$id_profesional;
+                 $opinion->aprobado = 0;
 
                  $opinion->save();
                  $opinion->load('profesional');
@@ -104,7 +115,7 @@ class OpinionCotroller extends Controller
     }
 
     public function getOpinionByProfesional($profesional_id){
-        $opinion= Opinion::where([['id_profesional', '=', $profesional_id]])->get();
+        $opinion= Opinion::where([['id_profesional', '=', $profesional_id],['aprobado','>',0]])->get();
         
         if(!is_null($opinion)){
             $opinion->load('profesional');

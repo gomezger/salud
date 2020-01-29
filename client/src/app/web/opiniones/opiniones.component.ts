@@ -70,6 +70,52 @@ export class OpinionesComponent implements OnInit {
     );  
   }
 
+
+  getAntiguedad(fecha: Date){
+    //creo fecha de la opinion
+    const fechaInicio = new Date(fecha).getTime();
+    //creo fecha actual
+    const today = new Date();
+    const fechaFin = new Date(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+':'+today.getMinutes()).getTime();
+    //busco diferencia
+    var diff = fechaFin - fechaInicio;
+
+    //paso diferencia a numeros entendibles
+    const minutos = diff/(1000*60);
+    const horas = diff/(1000*60*60);
+    const dias = diff/(1000*60*60*24);
+
+    //devuelvo el texto
+    if(minutos<60){
+      if(minutos<=1)
+        return "Hace un minuto";
+      else
+        return "Hace "+Math.trunc(minutos)+" minutos";
+    }else if(horas<24){      
+      if(horas<=1)
+        return "Hace una hora";
+      else
+        return "Hace "+Math.trunc(horas)+" horas";
+    }      
+    else if(dias<31){
+      if(dias<=1)
+        return "Hace un día";
+      else
+        return "Hace "+Math.trunc(dias)+" días";    
+    }else if(dias<=365){      
+      if((dias/30)<2)
+        return "Hace un mes";
+      else
+        return "Hace "+Math.trunc(dias/30)+" meses";   
+    }else if(dias>365){      
+      if((dias/365)<2)
+        return "Hace un año";
+      else
+      return "Hace "+Math.trunc(dias/365)+" años";
+    }else 
+      return fecha;
+  }
+
   enviar(){
     let element  = <HTMLInputElement> document.getElementById('texto');
     const descripcion=element.value; 
