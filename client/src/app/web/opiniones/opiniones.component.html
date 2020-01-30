@@ -1,7 +1,7 @@
 <section class="container">
 
 <div class="row">
-    <div class="col-lg-3 col-xl-3 d-none d-xl-block">
+    <div class="contenedor-caja col-xl-3 d-xl-block p-2">
         <!-- Tarjeta de Profesional -->
             <div class="caja" *ngIf="myProfesional!=null">
                 <img src="{{url_storage}}{{myProfesional.imagen}}" alt="" class="img-t">
@@ -23,10 +23,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row col-12 p-0 m-0">
             <!-- Enviar comentarios -->
-            <div class="col-12 p-0">
-                <div class="enviar">
+            <div class="col-12 p-0 m-0">
+
+                <div class="enviar col-12 p-0 pl-2 pl-md-0 m-0">
                     <textarea class="form-control textarea" id="texto" rows="3" placeholder="Ingrese aqui su comentario..." ></textarea>
                     <button class="boton" data-toggle="modal" data-target="#exampleModalLong"><i class="fas fa-paper-plane"></i></button>
 
