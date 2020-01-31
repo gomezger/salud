@@ -12,6 +12,7 @@
 
     <div class="col-xl-9 col-12 col-12 p-0">
         <div class="scroll-clase">
+
             <div class="caja-comentario" *ngFor="let op of opinionesProfesional">
                 <div class="comentario">             
                     <p class="fecha pl-2" style="text-align: end;">{{getAntiguedad(op.created_at)}}</p>       
@@ -23,6 +24,11 @@
                 </div>
             </div>
         </div>
+
+        <div class="alert alert-primary" *ngIf="alerta" role="alert">
+            Su comentario sera publicado cuando los administradores lo aprueben. Muchas gracias por su opinión.
+        </div>
+
         <div class="row col-12 p-0 m-0">
             <!-- Enviar comentarios -->
             <div class="col-12 p-0 m-0">

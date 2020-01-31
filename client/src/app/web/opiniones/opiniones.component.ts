@@ -17,9 +17,9 @@ export class OpinionesComponent implements OnInit {
   public opinionesProfesional:Array<Opinion>;
   public url_storage:String;
   public errores:Array<String>;
+  public alerta:boolean;
   
   @ViewChild('mimodal',{static: false}) modal:ElementRef;
-
   constructor(
     private profesionalService:ProfesionalService,
     private opinionService:OpinionService,
@@ -27,6 +27,7 @@ export class OpinionesComponent implements OnInit {
     private _route: ActivatedRoute
     ){ 
       this.url_storage=GLOBAL.url_storage;
+      this.alerta=false;
     }
 
   ngOnInit() {
@@ -134,9 +135,9 @@ export class OpinionesComponent implements OnInit {
         this.getOpiniones(this.myProfesional.id);
         element  = <HTMLInputElement> document.getElementById('texto');
         element.value="";
-        /* const modal = document.getElementById('exampleModalLong');
-        modal. */
         this.modal.nativeElement.click();
+        this.alerta=true;
+        setTimeout(()=>{this.alerta=false;},5000);
       });
     
     
