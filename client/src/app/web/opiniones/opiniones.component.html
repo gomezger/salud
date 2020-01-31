@@ -12,6 +12,7 @@
 
     <div class="col-xl-9 col-12 col-12 p-0">
         <div class="scroll-clase">
+            <div *ngIf="opinionesProfesional && opinionesProfesional.length==0" class="alert alert-info text-center">No hay comentarios todavía, ¡Se el primero!</div>
 
             <div class="caja-comentario" *ngFor="let op of opinionesProfesional">
                 <div class="comentario">             
