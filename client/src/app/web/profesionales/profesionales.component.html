@@ -36,7 +36,7 @@
                 <img src="{{url_storage}}{{profesional.imagen}}" alt="..." class="img-t">
                 <h5 class="m-2">{{profesional.nombre}}</h5>
                 <p>{{profesional.tipo_profesional.nombre}}</p>
-                <a href="#" class="boton col-6">Contactar</a>
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=54{{informacion.telefono}}&text=¡Hola {{informacion.nombre}}!, me interesa el {{profesional.tipo_profesional.nombre.toLowerCase()}} {{profesional.nombre}}." class="boton col-6">Contactar</a>
                 <div [routerLink]="['/opiniones',profesional.id]" class="opiniones">
                     <p style="margin-bottom: -5px;">Ver Opiniones</p>
                     <i class="fas fa-sort-down" style=" font-size: 20px; "></i>

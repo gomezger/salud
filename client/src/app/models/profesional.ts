@@ -4,7 +4,7 @@ export class Profesional {
     constructor(
         public id: number,
         public id_tipo: number,
-        public tipo: TipoProfesional,
+        public tipo_profesional: TipoProfesional,
         public nombre: string,
         public imagen: string,
         public imagen_file: File,

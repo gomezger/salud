@@ -1,6 +1,5 @@
 body{
     background-color:#1e7e710e;
-
 }
 .contenedor-tarjeta{    
     width: 100%;
@@ -69,6 +68,7 @@ img {
     border-radius: 0.3em;
     border: solid 0.05em #CCC;
     transition-duration: 0.5s;
+    cursor: pointer;
 }
 
 .item-desplegable:hover{

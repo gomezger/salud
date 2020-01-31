@@ -6,6 +6,8 @@ import {Profesional} from 'src/app/models/profesional';
 import { GLOBAL } from 'src/app/services/global';
 import { Title } from '@angular/platform-browser';
 import {Router,ActivatedRoute} from '@angular/router'
+import { Informacion } from 'src/app/models/informacion';
+import { InformacionService } from 'src/app/services/informacion.service';
 
 @Component({
   selector: 'app-profesionales',
@@ -18,11 +20,13 @@ export class ProfesionalesComponent implements OnInit {
   public url_storage:String;
   public errores:Array<String>;
   public hayProfesionales:boolean;
+  public informacion: Informacion;
 
   constructor(
     private _profesionalService:ProfesionalService,
     private _tipoProfesionalService:TipoProfesionalService,
     private _titleService: Title,
+    private _informacionService: InformacionService,
     private _router : Router, 
     private _route:ActivatedRoute
   ) { 
@@ -34,7 +38,8 @@ export class ProfesionalesComponent implements OnInit {
   ngOnInit() {
     this.getTiposProfesionales();
     this.getProfesionales();
-    this._titleService.setTitle('Profesionales | Cuidar Salud - Bahía Blanca');
+    this._titleService.setTitle('Profesionales | Cuidar Salud - Bahía Blanca');    
+    this.getInformacion();
   }
 
   getTiposProfesionales(){
@@ -108,8 +113,25 @@ export class ProfesionalesComponent implements OnInit {
       this.errores = [error.message,"Error al cargar los profesionales, recargue la pantalla y verifique su conexión a internet"];
     });
   }
+  /**
+   * Obtiene info del backend
+   */
+  getInformacion(){
 
-  goOpioniones(idProfesional:number){
-    this._router.navigate(['opiniones/:id',{id:idProfesional}]);
+    //busco en localSotrage
+    const cont = localStorage.getItem('informacion');
+    if(cont!==null)
+      this.informacion = JSON.parse(cont);
+
+    //busco una actualizacion en la base de datos
+    this._informacionService.informacion().subscribe(
+      response => {
+          if (response.status === 'success') {            
+            this.informacion = response.informacion;
+            localStorage.setItem('informacion',JSON.stringify(this.informacion));
+          }
+      },
+      error => {}
+    );
   }
 }
