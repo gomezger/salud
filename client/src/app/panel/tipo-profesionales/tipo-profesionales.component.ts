@@ -14,6 +14,7 @@ export class TipoProfesionalesComponent implements OnInit {
   public tipos: Array<TipoProfesional>;
   public errores: Array<String>;
   public filter:string = "";
+  public p: any;
 
   constructor(
     public _tipoProfesionalService: TipoProfesionalService,

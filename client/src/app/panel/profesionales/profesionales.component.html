@@ -29,7 +29,7 @@ placeholder="Filtrar por nombre o correo">
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let profesional of profesionales | paginate: { itemsPerPage: 10, currentPage: p }">
+            <ng-container *ngFor="let profesional of profesionales | paginate: { itemsPerPage: 10, currentPage: pag }">
                 <!-- DATOS PRINCIPALES  -->
                 <tr>
                     <th scope="row">
@@ -87,7 +87,7 @@ placeholder="Filtrar por nombre o correo">
     </table>
 </div>
 <div class="col-12 text-center">
-    <pagination-controls class="pagination clearfix d-inline-block mt-4" (pageChange)="p = $event" autoHide="true" responsive="true"
+    <pagination-controls class="pagination clearfix d-inline-block mt-4" (pageChange)="pag = $event" autoHide="true" responsive="true"
     directionLinks="true" previousLabel="Anterior" nextLabel="Siguiente" maxSize="4"></pagination-controls>
 </div>
 

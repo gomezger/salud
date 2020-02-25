@@ -1,9 +1,16 @@
 /**
  * para maquina local
  */
-export let GLOBAL = {
+/* export let GLOBAL = {
  	url_api: 'http://127.0.0.1:8000/',
  	url_storage: 'http://localhost:8000/storage/'
+}; */
+/**
+ * para prod en tk
+ */
+export let GLOBAL = {
+	url_api: 'https://cuidarsaludarg.tk/api/public',
+	url_storage: 'https://cuidarsaludarg.tk/api/storage/app/public/'
 };
 
 /**

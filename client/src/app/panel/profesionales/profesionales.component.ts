@@ -17,6 +17,7 @@ export class ProfesionalesComponent implements OnInit {
   public profesionales: Array<Profesional>;
   public errores: Array<String>;
   public url_storage: string;
+  public pag: any;
 	public filter: string = '';
 
   constructor(

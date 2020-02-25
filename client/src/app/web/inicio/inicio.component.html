@@ -10,13 +10,14 @@
                     <div class="row align-items-center">
                         <div class="info col-md-7 col-12 order-md-1 order-2 pl-md-0 mt-5 mt-md-5 pt-md-5">
                             <h4 class="mt-4 pt-5">
-                                Reprehet, qui blanditiis
+                                ¿Quiénes somos?
                             </h4>
                             <p>
-                                Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
-                                necessitatibus praesentium voluptatum deleniti atque corrupti.
+                                Somos una empresa familiar y local de la ciudad de Bahía Blanca<br>
+                                que se especializa en la prestación de servicios <br>
+                                relacionados con la salud.                                
                             </p>
-                            <a role="button" class="btn btn-outline-primary boton" href="#">Lorem ipsum</a> 
+                            <a role="button" class="btn btn-outline-primary boton" [routerLink]="['/contacto']">Contactanos</a> 
                         </div>
                         <a class="col-md-5 col-12 order-md-2 order-1 invisible d-none ">
                             <img src="https://i.imgur.com/NKvkfTT.png" class="mx-auto" alt="slide">
@@ -34,13 +35,14 @@
                     <div class="row align-items-center">
                         <div class="info col-md-7 col-12 order-md-1 order-2 pl-md-0 mt-5 mt-md-5 pt-md-5">
                             <h4 class="mt-4">
-                                Lorem ipsum dolor
+                                Nuestros profesionales
                             </h4>
                             <p>
-                                Lorem ipsum dolor sit amet. Reprehenderit, qui blanditiis quidem rerum <br>
-                                necessitatibus praesentium voluptatum deleniti atque corrupti.
+                                <b>Profesionales de enfermería</b>, logísticos para la realización<br>
+                                de actividades cotidianas, <b>acompañantes terapéuticos</b>, <br>
+                                cuidadores de la salud.
                             </p>
-                            <a role="button" class="btn btn-outline-primary boton" href="#">Lorem ipsum</a> 
+                            <a role="button" class="btn btn-outline-primary boton" [routerLink]="['/profesionales']">Ver profesionales</a> 
                         </div>
                         <div class="col-md-5 col-12 order-md-2 order-1 invisible d-none">
                             <img src="https://i.imgur.com/NKvkfTT.png" class="mx-auto" alt="slide">
@@ -88,6 +90,44 @@
 
 <div class="clearfix"></div>
 
+<!-- NOSOTROS -->
+<section class="nosotros clearfix d-none">
+    <div class="container">
+        <div class="imagen d-none d-md-inline-block">
+            <img class="p-0 col-12" src="/assets/nosotros.jpg">
+        </div>
+        <div class="descripcion pl-md-5 text-justify">
+            <h1 class="mt-1">Cuidar Salud</h1>
+            <div class="borde mt-0"></div>
+            <p>
+                Cuidar Salud es una empresa Familiar y Local de la Ciudad de Bahía Blanca que se especializa en la prestación de:<br>
+                <span class="ml-5"><i class="fas fa-caret-right mr-3"></i>Profesionales de Enfermería.<br></span>   
+                <span class="ml-5"><i class="fas fa-caret-right mr-3"></i>Acompañantes terapéuticos.<br></span>   
+                <span class="ml-5"><i class="fas fa-caret-right mr-3"></i>Cuidadores de la salud. <br></span>   
+                <span class="ml-5"><i class="fas fa-caret-right mr-3"></i>Logísticos para la realización de actividades cotidianas: Trámites, Traslados, Compras en general (Alimentos, Medicamentos, etc.).<br></span>   
+            </p>
+            <div class="borde corto pt-1"></div>
+        </div>
+        <div class="descripcion text-justify">
+            <p>
+                La excelencia y responsabilidad nos caracteriza por sobre las demás
+                 prestadoras de este tipo de servicios. Ofrecemos tranquilidad, 
+                 apoyo y contención tanto para el paciente como a la familia con un
+                  equipo capacitado, con experiencia y calidez humana.                
+            </p>
+            <p>
+                Cuidar Salud Bahía Blanca cuenta con una propuesta innovadora y 
+                transparente que a los usuarios les brinda confianza y credibilidad.
+                Esta plataforma fue creada para que quien haga uso de nuestros servicios
+                pueda conocer previamente el perfil del prestador con la posibilidad de 
+                seleccionarlo por nivel de capacitación, recomendaciones y comentarios 
+                de usuarios previos de dichos servicios.                                
+            </p>
+            <div class="borde corto pt-1"></div>
+        </div>
+    </div>
+</section>
+
 
 <!-- NOSOTROS -->
 <section class="nosotros clearfix">
@@ -95,14 +135,22 @@
         <div class="imagen d-none d-md-inline-block">
             <img class="p-0 col-12" src="/assets/nosotros.jpg">
         </div>
-        <div class="descripcion pl-md-5 text-justify">
+        <div class="descripcion  pl-md-5  text-justify">
             <h1 class="mt-1">Cuidar Salud</h1>
-            <div class="borde mt-1"></div>
+            <div class="borde mt-0"></div>
             <p>
-                Sed ut perspiciatis unde omnis <b>iste natus error sit voluptatem</b> accusantium doloremque laudantium, totam rem aperiam, aspernatur aut odit aut fugit, <b>sed quia consequuntur magni</b> dolores eos qui ratione voluptatem sequi nesciunt. 
+                La excelencia y responsabilidad nos caracteriza por sobre las demás
+                 prestadoras de este tipo de servicios. Ofrecemos tranquilidad, 
+                 apoyo y contención tanto para el paciente como a la familia con un
+                  equipo capacitado, con experiencia y calidez humana.                
             </p>
             <p>
-                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? 
+                Cuidar Salud Bahía Blanca cuenta con una propuesta innovadora y 
+                transparente que a los usuarios les brinda confianza y credibilidad.
+                Esta plataforma fue creada para que quien haga uso de nuestros servicios
+                pueda conocer previamente el perfil del prestador con la posibilidad de 
+                seleccionarlo por nivel de capacitación, recomendaciones y comentarios 
+                de usuarios previos de dichos servicios.                                
             </p>
             <div class="borde corto pt-1"></div>
         </div>

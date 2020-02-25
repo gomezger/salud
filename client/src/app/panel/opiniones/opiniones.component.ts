@@ -14,6 +14,7 @@ export class OpinionesComponent implements OnInit {
   public opiniones: Array<Opinion>;
   public errores: Array<string>;
 	public filter: string = '';
+  public p: any;
 
   constructor(
     public _opinionService: OpinionService,

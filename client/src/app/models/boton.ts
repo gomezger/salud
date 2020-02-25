@@ -1,7 +1,7 @@
 export class Boton {    
     constructor(
-        titulo: string,
-        link: string,
-        icono: string
+        public titulo: string,
+        public link: string,
+        public  icono: string
     ){ }
 }
