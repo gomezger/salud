@@ -1,0 +1,21 @@
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteCond %{HTTPS} off
+	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+	
+	RewriteEngine On
+	RewriteCond %{HTTP_HOST} ^www.cuidarsaludarg.com [NC]
+	RewriteRule ^(.*)$ http://cuidarsaludarg.com/$1 [L,R=301]
+
+	
+	RewriteEngine On
+	RewriteBase /
+	RewriteRule ^index\.html$ - [L]
+	RewriteCond %{HTTPS} on
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule . /index.html [L]
+	RewriteCond %{HTTPS} off
+	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+</IfModule>

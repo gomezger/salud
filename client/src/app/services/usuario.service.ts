@@ -25,9 +25,8 @@ export class UsuarioService {
         
       //hago la peticion
       const json = JSON.stringify(usuario);
-      const params = 'json=' + json;
-      const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-      return this._http.post(this.url + '/usuarios/login/', params, {'headers': headers});
+      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+      return this._http.post(this.url + '/usuarios/login', json, {'headers': headers});
   }
 
   /**

@@ -123,13 +123,11 @@ class UserController extends Controller
         $jwtAuth = new \JwtAuth();
 
         //obtener datos de post
-        $json = $request->input('json', null);
-        $params = json_decode($json);
-        $params_array = json_decode($json,true);
+        $params = $request->json()->all();      
 
-        if(!is_null($params_array)){
+        if($params && count($params)>0){
             //validar datos
-            $validate = \Validator::make( $params_array, [
+            $validate = \Validator::make( $params, [
                 'email' => 'required|email',
                 'password' => 'required'            
             ]);
@@ -147,8 +145,8 @@ class UserController extends Controller
             }else{
 
                 // cifrar pass
-                $password = hash('sha256', $params->password);
-                $token = $jwtAuth->login($params->email,$password);
+                $password = hash('sha256', $params['password']);
+                $token = $jwtAuth->login($params['email'],$password);
 
                 return response()->json($token,200);
             }

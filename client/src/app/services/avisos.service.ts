@@ -28,7 +28,7 @@ export class AvisosService {
     //creo headers
     const headers = new HttpHeaders();
 
-    return this._http.post(this.url + 'avisos/correoweb/', params, { 'headers' : headers });
+    return this._http.post(this.url + 'avisos/correoweb', params, { 'headers' : headers });
   }
   
   public sumate(sumate: Sumate): Observable<any>{    
@@ -42,7 +42,7 @@ export class AvisosService {
     //creo headers
     const headers = new HttpHeaders();
 
-    return this._http.post(this.url + 'avisos/sumate/', params, { 'headers' : headers });
+    return this._http.post(this.url + 'avisos/sumate', params, { 'headers' : headers });
   }
 
 

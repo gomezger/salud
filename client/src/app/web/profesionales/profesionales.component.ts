@@ -75,7 +75,7 @@ export class ProfesionalesComponent implements OnInit {
     this._profesionalService.getProfesionales().subscribe(
       response => {
           if (response.status === 'success') {
-            if(this.ListaProfesionales.length===0){
+            if(this.ListaProfesionales && this.ListaProfesionales.length===0){
               this.hayProfesionales=false;
             }else{
               this.hayProfesionales=true;

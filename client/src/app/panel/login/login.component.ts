@@ -43,8 +43,6 @@ export class LoginComponent implements OnInit {
 		$('.alert').removeClass('d-none');
 		$('.alert').text('Validando datos...');
 
-		console.log(this.user);
-
 		//le paso el usuario que solo tiene la contraseña y el usuario
 		this._usuarioService.login(this.user).subscribe(
 			(response) => {

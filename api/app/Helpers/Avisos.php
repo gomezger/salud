@@ -4,6 +4,7 @@ namespace App\Helpers;
 use Illuminate\Support\Facades\BD;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 use App\Exception\AvisosException;
 use App\Aviso;
 use App\Informacion;
@@ -106,7 +107,7 @@ class Avisos{
      * $from_name: nombre representativo del cual se envia el mail
      * $archivo: adjunto a enviar
      */
-    private function enviarCorreo($to,$asunto,$mensaje,$from,$from_name=NULL,$adjuntos=NULL){
+    /*private function enviarCorreo($to,$asunto,$mensaje,$from,$from_name=NULL,$adjuntos=NULL){
 
         //crear instancia
         $mail = new PHPMailer();
@@ -115,15 +116,15 @@ class Avisos{
         //tipo de smtp
         $mail->SMTPDebug = false;
         //host mail de neolo
-        $mail->Host = 'mail.detailingbahia.com';
+	    $mail->Host = 'email-smtp.us-east-1.amazonaws.com';
         // puerto para ssl/tls
-        $mail->Port = 465;
+        $mail->Port = 587;
         //seguridad
         $mail->SMTPAuth = true;
-        $mail->SMTPSecure = "ssl";
+        $mail->SMTPSecure = "tls";
         //usuario y pass
-        $mail->Username = '_mainaccount@detailingbahia.com';
-        $mail->Password = 'Bahia1520!';
+        $mail->Username = 'AKIA2G4PNIAUR4YSLGKK';
+        $mail->Password = 'BJSWmp72X/90FT7Mr9zKgrjKPzS4g06nfwqVZ0/e9mll';
         //quien envia
         if($from_name!=NULL){
             $mail->setFrom($from, $from_name);
@@ -153,6 +154,54 @@ class Avisos{
             throw new Exception($mail->ErrorInfo);
         }
 
+    }*/
+
+
+    private function enviarCorreo($to,$asunto,$mensaje,$from,$from_name=NULL,$adjuntos=NULL){
+        // Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'email-smtp.us-east-1.amazonaws.com';   // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'AKIA2G4PNIAUR4YSLGKK';                 // SMTP username
+            $mail->Password   = 'BJSWmp72X/90FT7Mr9zKgrjKPzS4g06nfwqVZ0/e9mll';  // SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;    
+
+            //Recipients
+            if($from_name!=NULL){
+                $mail->setFrom($from, $from_name);
+                $mail->addReplyTo($from,$from_name);
+            }else{
+                $mail->setFrom($from);
+                $mail->addReplyTo($from);		
+            }
+            $mail->addCC($to, 'Cuidar Salud');
+
+            //adjuntos
+            if(!is_null($adjuntos))       
+                foreach($adjuntos as $adjunto)
+                    $mail->addAttachment($adjunto[1]->getRealPath(),$adjunto[0].'.'.$adjunto[1]->extension());         
+            
+            //asunto y mensaje
+            $mail->isHTML(true);
+            $mail->Subject = $asunto;
+            $mail->Body = $mensaje;
+            $mail->AltBody = $mensaje;
+            $mail->CharSet = 'UTF-8';
+
+            //send
+            if(!$mail->send()){
+                throw new Exception($mail->ErrorInfo);
+            }    
+        
+        }catch(Exception $e) {
+            throw new Exception($mail->ErrorInfo);
+        }  
     }
     
     /**

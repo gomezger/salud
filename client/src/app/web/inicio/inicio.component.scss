@@ -16,7 +16,7 @@ section.nosotros .imagen{
 }
 
 section.nosotros .descripcion{
-	max-width: 56.5%;
+	max-width: 51%;
 	float: left;
 }
 
@@ -137,6 +137,9 @@ section#botones .columna .boton:hover{
 	section#botones .columna .titulo{
 		font-size: 22px;
 	}
+	section.nosotros .descripcion{
+		max-width: 49%;
+	}
 }
 
 @media only screen and (min-width: 1100px) and (max-width: 1400px) {
@@ -166,6 +169,9 @@ section#botones .columna .boton:hover{
 	}
 	section#botones .columna .boton{
 		font-size: 11px;
+	}
+	section.nosotros .descripcion{
+		max-width: 100%;
 	}
 	
 }
@@ -243,6 +249,10 @@ section#botones .columna .boton:hover{
 		border-radius: 0.3em;
 		border: solid 0.05em #CCC;
 	}
+	section.nosotros .descripcion{
+		max-width: 100%;
+	}
+
 }
 
 /* Large Mobile : 480px. */
@@ -250,10 +260,6 @@ section#botones .columna .boton:hover{
 @media only screen and (max-width: 767px) {
 	section.nosotros{
 		padding: 25px 0;
-	}
-
-	section.nosotros .descripcion{
-		max-width: 100%;
 	}
 
 }

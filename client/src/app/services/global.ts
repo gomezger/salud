@@ -8,18 +8,18 @@
 /**
  * para prod en tk
  */
-export let GLOBAL = {
-	url_api: 'https://cuidarsaludarg.tk/api/public',
+/* export let GLOBAL = {
+	url_api: 'https://cuidarsaludarg.tk/api/public/',
 	url_storage: 'https://cuidarsaludarg.tk/api/storage/app/public/'
-};
+}; */
 
 /**
  * para prod
  */
-/*export let GLOBAL = {
-	url_api: 'https://cuidarsaludarg.com/api/public',
+export let GLOBAL = {
+	url_api: 'https://cuidarsaludarg.com/api/public/',
 	url_storage: 'https://cuidarsaludarg.com/api/storage/app/public/'
-};*/
+};
 
 /**
  * para prod (beta)
