@@ -62,9 +62,9 @@ export class PanelComponent implements OnInit,DoCheck {
 
 
   logout(){    
-    localStorage.removeItem('token');
-    localStorage.removeItem('isLoggedin');
-    localStorage.removeItem('identity');
+    localStorage.removeItem('token-panel');
+    localStorage.removeItem('isLoggedin-panel');
+    localStorage.removeItem('identity-panel');
 
     this._route.navigate(['panel/login']);
   }

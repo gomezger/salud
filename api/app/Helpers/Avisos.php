@@ -163,14 +163,14 @@ class Avisos{
 
         try {
             //Server settings
-            $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            $mail->SMTPDebug = 0; //SMTP::DEBUG_SERVER;                      // Enable verbose debug output
             $mail->isSMTP();                                            // Send using SMTP
-            $mail->Host       = 'email-smtp.us-east-1.amazonaws.com';   // Set the SMTP server to send through
+            $mail->Host       = 'mail.cuidarsaludarg.com';   // Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            $mail->Username   = 'AKIA2G4PNIAUR4YSLGKK';                 // SMTP username
-            $mail->Password   = 'BJSWmp72X/90FT7Mr9zKgrjKPzS4g06nfwqVZ0/e9mll';  // SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            $mail->Port       = 587;    
+            $mail->Username   = 'send@cuidarsaludarg.com';              // SMTP username
+            $mail->Password   = 'Cuidar1520!';                          // SMTP password
+            $mail->SMTPSecure = 'ssl';         
+            $mail->Port       = 465;    
 
             //Recipients
             if($from_name!=NULL){
