@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
 							localStorage.setItem('identity-panel', JSON.stringify(response2));
 
 							// redireccionamos
-							this._route.navigate([ '/panel' ], { relativeTo: this._router });
+							this._route.navigate(['/panel/profesionales'], { relativeTo: this._router });
 							
 						},
 						(error) => {		

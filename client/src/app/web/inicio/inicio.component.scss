@@ -21,7 +21,7 @@ section.nosotros .descripcion{
 }
 
 section.nosotros .descripcion2{
-	max-width: 100% !important;
+	max-width: 94% !important;
 	float: left;
 }
 
@@ -127,6 +127,14 @@ section#botones .columna .boton:hover{
     transition: 0.4s;
 }
 
+
+@media (max-width: 1710px) {
+
+	section.nosotros .descripcion2{
+		max-width: 100% !important;
+		float: left;
+	} 
+}
 
 @media (max-width: 1410px) {
 	
